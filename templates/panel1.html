@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block content %}
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+  <ul class="flashes">
+    {% for message in messages %}
+      <li>{{ message }}</li>
+    {% endfor %}
+  </ul>
+{% endif %}
+{% endwith %}
+  <div class="navbar">
+<h1>Admin Panel</h1>
+<a href="#">Dashboard</a>
+<a href="{{ url_for('user_management') }}">UserManagement</a>
+<a href="{{ url_for('addpr') }}">Product</a>
+<a href="#">Inventory</a>
+  <a href="{{ url_for('admin_login') }}" class="btn btn-danger">Logout</a>
+  </div>
+
+
+  
+{% endblock %}

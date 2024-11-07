@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PROFILE</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+            integrity="sha512-1qcd0MDiccMmJ3fr4z2APtCwSov+g8qE7a1IaQz5yblLEZNLNT5WLC/Bp9QpLbkL1Ix9MTEUwHkjhFVplYAfaA=="
+            crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.4/dist/sweetalert2.min.css">
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/static/assets/images/logocosmic/logo.png" />
+    <!-- Plugins CSS -->
+    <link rel="stylesheet" href="/static/assets/css/plugins.css">
+    <!-- Bootstap CSS -->
+    <link rel="stylesheet" href="/static/assets/css/bootstrap.min.css">
+    <!-- Main Style CSS -->
+    <link rel="stylesheet" href="/static/assets/css/style.css">
+    <link rel="stylesheet" href="/static/assets/css/responsive.css">
+
+    
+    <style>
+      
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo a {
+            text-decoration: none; /* Remove underline from the anchor */
+            display: block; /* Make the anchor a block-level element */
+        }
+        
+        .logo img {
+            max-width: 50%; /* Make sure the image doesn't exceed its container */
+            height: auto; /* Maintain aspect ratio */
+            /* Add a subtle box shadow for a lifted appearance */
+        }
+        
+        /* Optional: Add some margin or padding for spacing */
+        .logo {
+            margin-bottom: 20px;
+        }
+        .swal2-container {
+            height: 200px;
+            display: flex;
+            flex-direction: row-reverse; /* Align the container to the right side */
+        }
+    
+        .swal2-popup {
+            max-width: 300px; /* Set the maximum width of the popup */
+            text-align: left; /* Align text to the left */
+        }
+    
+        .swal2-icon {
+            margin: 15px; /* Add margin to the icon */
+            width: 30px; /* Set the width of the icon */
+            height: 30px; /* Set the height of the icon */
+        }
+    
+        .swal2-content {
+            padding: 15px; /* Add padding to the content */
+        }
+    
+        .swal2-actions {
+            justify-content: flex-end; /* Align actions to the right side */
+        }
+        .img-account-profile {
+            width: 150px; /* Adjust the width to your desired size */
+            height: 150px; /* Adjust the height to your desired size */
+            border-radius: 50%; /* Remove the border-radius for a square shape */
+            /* Add any additional styling you need */
+        
+            /* Responsive Styles */
+            @media (max-width: 768px) {
+                /* Adjust the styles for devices with a screen width of 768px or less */
+                width: 100px;
+                height: 100px;
+            }
+        
+            @media (max-width: 480px) {
+                /* Adjust the styles for devices with a screen width of 480px or less */
+                width: 80px;
+                height: 80px;
+            }
+        }
+    </style>
+</head>
+<body>
+     
+    {% extends 'base.html' %}
+
+    {% block content %}
+<div class="pageWrapper">
+	<!-- Include the search form -->
+    <div class="search">
+        <div class="search__form">
+            <form class="search-bar__form" action="{{ url_for('search') }}" method="post">
+                <button class="go-btn search__button" type="submit"><i class="icon anm anm-search-l"></i></button>
+                <input class="search__input" type="search" name="search_query" value="" placeholder="Search entire store..." aria-label="Search" autocomplete="off">
+            </form>
+            <button type="button" class="search-trigger close-btn"><i class="anm anm-times-l"></i></button>
+        </div>
+    </div>
+    <!--Top Header-->
+    <div class="top-header">
+        <div class="container-fluid">
+            <div class="row">
+            	<div class="col-10 col-sm-8 col-md-5 col-lg-4">
+                    
+                    <p class="phone-no"><i class="anm anm-phone-s"></i>091234567</p>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4 d-none d-lg-none d-md-block d-lg-block">
+                	<div class="text-center"><p class="top-header_middle-text">COSMIC PHILIPPINES</p></div>
+                </div>
+                 <!-- User Menu -->
+                 <div class="col-2 col-sm-4 col-md-3 col-lg-4 text-right">
+                    <span class="user-menu d-block d-lg-none" data-toggle="modal" data-target="#userMenuModal">
+                        <i class="anm anm-user-al" aria-hidden="true"></i>
+                    </span>
+                    <ul class="customer-links list-inline">
+                        {% if logged_in %}
+                        <li class="nav-item">
+                            <a class="nav-link bi bi-person-circle" href="#" onclick="showProfileMenu()">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+                                    <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
+                                    <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
+                                </svg>
+                                {{ email_name }}
+                            </a>
+                        </li>
+                        {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link bi bi-person-circle" href="{{ url_for('login') }}">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+                                    <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
+                                    <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
+                                </svg>
+                                Log In
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url_for('register') }}">Create Account</a>
+                        </li>
+                        {% endif %}
+                    </ul>
+                </div>
+                
+                <!-- End User Menu -->
+            </div>
+        </div>
+    </div>
+    <!--End Top Header-->
+    <!--Header-->
+    <div class="header-wrap classicHeader animated d-flex">
+    	<div class="container-fluid">        
+            <div class="row align-items-center">
+            	<!--Desktop Logo-->
+                <div class="logo col-md-1 col-lg-2 d-none d-lg-block">
+                    <a href="{{ url_for('index') }}">
+                    	<img src="/static/assets/images/logocosmic/LOGO1.png" alt="Belle Multipurpose Html Template" title="Belle Multipurpose Html Template" />
+                    </a>
+                </div>
+                <!--End Desktop Logo-->
+                <div class="col-2 col-sm-3 col-md-3 col-lg-8">
+                	<div class="d-block d-lg-none">
+                        <button type="button" class="btn--link site-header__menu js-mobile-nav-toggle mobile-nav--open">
+                        	<i class="icon anm anm-times-l"></i>
+                            <i class="anm anm-bars-r"></i>
+                        </button>
+                    </div>
+                	<!--Desktop Menu-->
+                	<nav class="grid__item" id="AccessibleNav"><!-- for mobile -->
+                        <ul id="siteNav" class="site-nav medium center hidearrow">
+                            <li class="lvl1 parent megamenu"><a href="{{ url_for('index') }}">Home <i class="anm anm-angle-down-l"></i></a>
+
+                            </li>
+                            <li class="lvl1 parent megamenu"><a href="{{ url_for('shop') }}">Shop <i class="anm anm-angle-down-l"></i></a>
+                            	
+                            </li>
+                        <li class="lvl1 parent megamenu"><a href="{{ url_for('aboutus') }}">About Us <i class="anm anm-angle-down-l"></i></a>
+                        	
+                        </li>
+                        <li class="lvl1 parent dropdown"><a href="#">Pages <i class="anm anm-angle-down-l"></i></a>
+                          <ul class="dropdown">
+                          	<li><a href="{{ url_for('cart') }}" class="site-nav">Cart Page <i class="anm anm-angle-right-l"></i></a></li>
+							<li><a href="{{ url_for('checkout') }}" class="site-nav">Checkout</a></li>
+
+                            <li><a href="contact-us.html" class="site-nav">Contact Us</a></li>
+                            <li><a href="faqs.html" class="site-nav">FAQs</a></li>
+                      </ul>
+                    </nav>
+                </div>
+                    <!--End Desktop Menu-->
+
+                    
+                   
+                            <!-- Account page navigation-->
+                            <div class="row flex-nowrap">
+                                <div class="col-xl-4">
+                                <!-- Profile picture card-->
+                                <div class="card mb-4">
+                                    <div class="card-header">Profile Picture</div>
+                                    <div class="card-body text-center">
+                                        <!-- Profile picture form -->
+                                        <form action="{{ url_for('update_picture') }}" method="post" enctype="multipart/form-data" id="profile-form">
+                                            <!-- Profile picture image-->
+                                            {% if image_filename %}
+                                            <img class="img-account-profile mb-2" src="{{ url_for('uploaded_file', image_filename=image_filename) }}" alt="profile Image">
+                                            <div class="custom-file mt-3">
+                                                <input type="file" class="custom-file-input" name="new_profile_picture" accept="image/png, image/jpeg" id="update-input" style="display: none" />
+                                                <label class="custom-file-label" for="update-input">Choose file</label>
+                                            </div>
+                                            <button class="btn btn-primary mt-2" type="submit">Update Profile Picture</button>
+                                            {% else %}
+                                            <!-- Profile picture help block-->
+                                            <div class="small font-italic text-muted mb-4">JPG or PNG no larger than 5 MB</div>
+                                            <!-- Profile picture upload button-->
+                                            <div class="custom-file">
+                                                <input type="file" class="custom-file-input" name="new_profile_picture" accept="image/png, image/jpeg" id="upload-input" />
+                                                <label class="custom-file-label" for="upload-input">Choose file</label>
+                                            </div>
+                                            <button class="btn btn-primary mt-2" type="button" id="toggle-button">Update</button>
+                                            <button class="btn btn-primary mt-2" type="submit" style="display: none" id="upload-button">Upload new image</button>
+                                            {% endif %}
+                                        </form>
+                                    </div>
+                                </div>
+                
+                                <!-- Navigation Card -->
+                                <div class="card">
+                                    <nav class="grid__item">
+                                        <a class="nav-link active ms-0" href="#" target="__blank">Profile</a>
+                                        <a class="nav-link" href="{{ url_for('order_detail') }}">My Purchase</a>
+                                        <a class="nav-link" href="{{ url_for('users_wallet') }} ">Wallet</a>
+                                        <a class="nav-link" href="{{ url_for('own_address') }}">My Address</a>
+                                        <a class="nav-link" href="{{ url_for('WISHLIST') }}">Wishlist</a>
+                                    </nav>
+                                </div>
+                            </div>
+                        
+                            <div class="col-lg-8">
+                                <!-- Account details card-->
+                                <div class="card account-details-card">
+                                    <div class="card-header">Account Details</div>
+                                    <div class="card-body">
+                                        <form method="POST" action="/update_prof">
+                                            <!-- Username -->
+                                            <div class="mb-3">
+                                                <label class="form-label" for="inputUsername">Username</label>
+                                                <input name="id" type="hidden" value="{{ id }}">
+                                                <input class="form-control" id="inputUsername" type="text" placeholder="Enter your username" name="new_username" value="{{ username }}" readonly>
+                                            </div>
+                
+                                            <!-- First and Last Name -->
+                                            <div class="row gx-3 mb-3">
+                                                <div class="col-md-6">
+                                                    <label class="form-label" for="inputFirstName">First name</label>
+                                                    <input class="form-control" id="inputFirstName" type="text" placeholder="Enter your first name" name="new_firstname" value="{{ firstname }}">
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label class="form-label" for="inputLastName">Last name</label>
+                                                    <input class="form-control" id="inputLastName" type="text" placeholder="Enter your last name" name="new_lastname" value="{{ lastname }}">
+                                                </div>
+                                            </div>
+                
+                                            <!-- Location -->
+                                            <div class="row gx-3 mb-3">
+                                                <div class="col-md-6">
+                                                    <label class="form-label" for="inputLocation">Location</label>
+                                                    <input class="form-control" id="inputLocation" type="text" placeholder="Enter your location" name="new_location" value="{{ location }}">
+                                                </div>
+                                            </div>
+                
+                                            <!-- Email Address -->
+                                            <div class="mb-3">
+                                                <label class="form-label" for="inputEmailAddress">Email address</label>
+                                                <input class="form-control" id="inputEmailAddress" type="email" placeholder="Enter your email address" name="new_email" value="{{ email }}" required readonly>
+                                            </div>
+                
+                                            <!-- Phone Number and Birthday -->
+                                            <div class="row gx-3 mb-3">
+                                                <div class="col-md-6">
+                                                    <label class="form-label" for="inputPhone">Phone number</label>
+                                                    <input class="form-control" id="inputPhone" type="tel" placeholder="Enter your phone number" name="new_phone_number" value="{{ phone_number }}">
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label class="form-label" for="inputBirthday">Birthday</label>
+                                                    <input class="form-control" id="inputBirthday" type="text" name="new_birthday" placeholder="Enter your birthday" value="{{ birthday }}">
+                                                </div>
+                                            </div>
+
+                                            <!-- Password -->
+<div class="mb-3">
+    <label class="form-label" for="inputPassword">Password</label>
+    <input class="form-control" id="inputPassword" type="password" placeholder="Password" name="new_password" value="{{ password }}">
+</div>
+
+<!-- Confirm Password -->
+<div class="mb-3">
+
+</div>
+                
+                                            <button class="btn btn-primary" type="submit">Save changes</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                   
+
+
+                         <!-- Including Jquery -->
+     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+     <script src="/static/assets/js/vendor/jquery.cookie.js"></script>
+     <script src="/static/assets/js/vendor/modernizr-3.6.0.min.js"></script>
+     <script src="/static/assets/js/vendor/wow.min.js"></script>
+     <!-- Including Javascript -->
+     <script src="/static/assets/js/bootstrap.min.js"></script>
+     <script src="/static/assets/js/plugins.js"></script>
+     <script src="/static/assets/js/popper.min.js"></script>
+     <script src="/static/assets/js/lazysizes.js"></script>
+     <script src="/static/assets/js/main.js"></script>
+
+     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+     <script>
+        function showProfileMenu() {
+            Swal.fire({
+                html: `
+                    <a class="dropdown-item" href="/prof">MY PROFILE</a>
+                    <a class="dropdown-item" href="{{ url_for('LOGOUT') }}">LOGOUT</a>
+                `,
+                showCloseButton: true,
+                showConfirmButton: false,
+                backdrop: false,
+            });
+        }
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.4/dist/sweetalert2.min.js"></script>
+
+
+    <script>
+        $(document).ready(function () {
+            $('#toggle-button').click(function () {
+                $('#upload-input').toggle();
+                $('#update-input').toggle();
+                $('#upload-button').toggle();
+            });
+        });
+    </script>
+    {% endblock %}
+</body>
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 20px;
+    }
+
+    h1 {
+        margin-bottom: 20px;
+    }
+
+    form {
+        max-width: 400px;
+        margin: 0 auto;
+    }
+
+    table {
+        width: 100%;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 10px;
+        font-weight: bold;
+    }
+
+    input[type="text"],[type="email"],[type="password"] {
+        width: 100%;
+        padding: 10px;
+        font-size: 16px;
+        border: 1px solid #25b215;
+        border-radius: 4px;
+        margin-bottom: 10px;
+    }
+
+    button[type="submit"] {
+        padding: 10px 20px;
+        font-size: 16px;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        margin-left: 150px;
+    }
+
+    button[type="submit"]:hover {
+        background-color: #45a049;
+    }
+    h1{
+        text-align: center;
+    }
+</style>
+<body>
+    <h1>Edit Seller</h1>
+<form method="POST" action="/edit_seller/{{ seller[0] }}">
+    <table>
+        <tr>
+            <td><label for="first_name">First Name:</label></td>
+            <td><input type="text" id="first_name" name="first_name" value="{{ seller[1] }}" required></td>
+        </tr>
+
+        <tr>
+            <td><label for="last_name">Last Name:</label></td>
+            <td><input type="text" id="last_name" name="last_name" value="{{ seller[2] }}" required></td>
+        </tr>
+
+        <tr>
+            <td><label for="email">Email:</label></td>
+            <td><input type="email" id="email" name="email" value="{{ seller[3] }}" required></td>
+        </tr>
+
+        <tr>
+            <td><label for="role">Role:</label></td>
+            <td><input type="text" id="role" name="role" value="{{ seller[5] }}" required></td>
+        </tr>
+
+        <tr>
+            <td><label for="shop_name">Shop Name:</label></td>
+            <td><input type="text" id="shop_name" name="shop_name" value="{{ seller[6] }}" required></td>
+        </tr>
+    </table>
+    <button type="submit">UPDATE</button>
+</form>
+</body>
+</html>

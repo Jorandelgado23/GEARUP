@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Results</title>
+</head>
+<body>
+    <h1>Search Results for "{{ search_query }}"</h1>
+    {% if results %}
+        <ul>
+            {% for product in results %}
+                <li>
+                    <h3>{{ product.name }}</h3>
+                    <p>Description: {{ product.description }}</p>
+                    <p>Category: {{ product.category }}</p>
+                    <p>Price: ${{ product.price }}</p>
+                    <img src="{{ url_for('uploaded_file', image_filename=product.image_filename) }}" alt="{{ product.name }}">
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No results found.</p>
+    {% endif %}
+</body>
+</html>

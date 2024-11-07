@@ -1,0 +1,940 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+
+<!-- belle/cart-variant1.html   11 Nov 2019 12:44:31 GMT -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<title>Cart Page &ndash; Belle Multipurpose Bootstrap 4 Template</title>
+<meta name="description" content="description">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Favicon -->
+<link rel="shortcut icon" href="/static/assets/images/logocosmic/logo.png"/>
+<!-- Plugins CSS -->
+<link rel="stylesheet" href="/static/assets/css/plugins.css">
+<!-- Bootstap CSS -->
+<link rel="stylesheet" href="/static/assets/css/bootstrap.min.css">
+<!-- Main Style CSS -->
+<link rel="stylesheet" href="/static/assets/css/style.css">
+<link rel="stylesheet" href="/static/assets/css/responsive.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.4/dist/sweetalert2.min.css">
+
+
+<style>
+    .logo {
+        display: flex;
+        align-items: center;
+    }
+    
+    .logo a {
+        text-decoration: none; /* Remove underline from the anchor */
+        display: block; /* Make the anchor a block-level element */
+    }
+    
+    .logo img {
+        max-width: 50%; /* Make sure the image doesn't exceed its container */
+        height: auto; /* Maintain aspect ratio */
+        border-radius: 8px; /* Add some border-radius for a rounded look */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow for a lifted appearance */
+    }
+    
+    /* Optional: Add some margin or padding for spacing */
+    .logo {
+        margin-bottom: 20px;
+    }
+
+    
+    
+    th, td {
+        padding: 12px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+        font-weight: bold;
+    }
+    
+    th {
+        background-color: #8a2be2; /* Blue Violet color */
+        color: black;
+    }
+    
+    .quantity-input {
+        width: 60px;
+        padding: 8px;
+        box-sizing: border-box;
+    }
+    
+
+    
+    
+    .subtotal-form {
+        margin-top: 20px;
+    }
+    
+    .subtotal-value, .total-value {
+        font-size: 20px;
+        font-weight: bold;
+        color: #8a2be2; /* Blue Violet color */
+    }
+    
+
+    .flash-popup {
+        position: fixed;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 1000;
+      }
+      
+      .flash-messages {
+        list-style-type: none;
+        padding: 20px;
+        margin: 0;
+        width: 300px;
+        text-align: center;
+      }
+      
+      .flash-message {
+        margin-bottom: 10px;
+        padding: 20px;
+        border-radius: 5px;
+        animation: fadeInOut 3s ease;
+      }
+      
+      /* Styles for the general flash message */
+      .flash-message {
+        background: rgb(2,0,36);
+        background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(121,9,86,0.8350937787224264) 60%, rgba(151,52,142,1) 100%);
+        color: white;
+        font-size: larger;
+      }
+      .swal2-container {
+        height: 200px;
+        display: flex;
+        flex-direction: row-reverse; /* Align the container to the right side */
+    }
+
+    .swal2-popup {
+        max-width: 300px; /* Set the maximum width of the popup */
+        text-align: left; /* Align text to the left */
+    }
+
+    .swal2-icon {
+        margin: 15px; /* Add margin to the icon */
+        width: 30px; /* Set the width of the icon */
+        height: 30px; /* Set the height of the icon */
+    }
+
+    .swal2-content {
+        padding: 15px; /* Add padding to the content */
+    }
+
+    .swal2-actions {
+        justify-content: flex-end; /* Align actions to the right side */
+    }
+      
+</style>
+</head>
+<body class="page-template belle cart-variant1">
+<div class="pageWrapper">
+	<!--Search Form Drawer-->
+	<div class="search">
+        <div class="search__form">
+            <form class="search-bar__form" action="#">
+                <button class="go-btn search__button" type="submit"><i class="icon anm anm-search-l"></i></button>
+                <input class="search__input" type="search" name="q" value="" placeholder="Search entire store..." aria-label="Search" autocomplete="off">
+            </form>
+            <button type="button" class="search-trigger close-btn"><i class="icon anm anm-times-l"></i></button>
+        </div>
+    </div>
+    <!--End Search Form Drawer-->
+    <!--Top Header-->
+    <div class="top-header">
+        <div class="container-fluid">
+            <div class="row">
+            	<div class="col-10 col-sm-8 col-md-5 col-lg-4">
+                    
+                    <p class="phone-no"><i class="anm anm-phone-s"></i>091234567</p>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4 d-none d-lg-none d-md-block d-lg-block">
+                	<div class="text-center"><p class="top-header_middle-text">COSMIC PHILIPPINES</p></div>
+                </div>
+                
+                 <!-- User Menu -->
+<!-- User Menu -->
+<div class="col-2 col-sm-4 col-md-3 col-lg-4 text-right">
+    <span class="user-menu d-block d-lg-none" data-toggle="modal" data-target="#userMenuModal">
+        <i class="anm anm-user-al" aria-hidden="true"></i>
+    </span>
+    <ul class="customer-links list-inline">
+        {% if logged_in %}
+            <li class="nav-item">
+                {% if user_exist %}
+                    <a class="nav-link" href="/sellerpage">View Shop</a>
+                {% else %}
+                    <a class="nav-link" href="{{ url_for('seller_registration') }}">Start Selling</a>
+                {% endif %}
+            </li>
+            <li class="nav-item">
+                <a class="nav-link bi bi-person-circle" href="#" onclick="showProfileMenu()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+                        <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
+                        <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
+                    </svg>
+                    {{ email }}
+                    <i class="bi bi-caret-down-square-fill">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-square-fill" viewBox="0 0 16 16">
+                            <path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm4 4a.5.5 0 0 0-.374.832l4 4.5a.5.5 0 0 0 .748 0l4-4.5A.5.5 0 0 0 12 6z"/>
+                        </svg>
+                    </i>
+                </a>
+            </li>
+        {% else %}
+            <li class="nav-item">
+                <a class="nav-link bi bi-person-circle" href="{{ url_for('login') }}">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+                        <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
+                        <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
+                    </svg>
+                    Log In
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('register') }}">Create Account</a>
+            </li>
+        {% endif %}
+    </ul>
+</div>
+<!-- End User Menu -->
+
+
+
+            </div>
+        </div>
+    </div>
+    <!--End Top Header-->
+    <!--Header-->
+    <div class="header-wrap animated d-flex">
+    	<div class="container-fluid">        
+            <div class="row align-items-center">
+            	<!--Desktop Logo-->
+                <div class="logo col-md-2 col-lg-2 d-none d-lg-block">
+                    <a href="{{ url_for('index') }}">
+                    	<img src="/static/assets/images/logocosmic/LOGO1.png" alt="Belle Multipurpose Html Template" title="Belle Multipurpose Html Template" />
+                    </a>
+                </div>
+                <!--End Desktop Logo-->
+                <div class="col-2 col-sm-3 col-md-3 col-lg-8">
+                	<div class="d-block d-lg-none">
+                        <button type="button" class="btn--link site-header__menu js-mobile-nav-toggle mobile-nav--open">
+                        	<i class="icon anm anm-times-l"></i>
+                            <i class="anm anm-bars-r"></i>
+                        </button>
+                    </div>
+                	<!--Desktop Menu-->
+                	<nav class="grid__item" id="AccessibleNav"><!-- for mobile -->
+                        <ul id="siteNav" class="site-nav medium center hidearrow">
+                            <li class="lvl1 parent megamenu"><a href="{{ url_for('index') }}">Home <i class="anm anm-angle-down-l"></i></a>
+
+                            </li>
+                            <li class="lvl1 parent megamenu"><a href="{{ url_for('shop') }}">Shop <i class="anm anm-angle-down-l"></i></a>
+                            	
+                            </li>
+                            <li class="lvl1 parent megamenu"><a href="{{ url_for('aboutus') }}">About Us <i class="anm anm-angle-down-l"></i></a>
+                        	
+                        </li>
+                        <li class="lvl1 parent dropdown"><a href="#">Pages <i class="anm anm-angle-down-l"></i></a>
+                          <ul class="dropdown">
+                          	<li><a href="{{ url_for('cart') }}" class="site-nav">Cart Page <i class="anm anm-angle-right-l"></i></a></li>
+							<li><a href="{{ url_for('checkout') }}" class="site-nav">Checkout</a></li>
+                            <li><a href="about-us.html" class="site-nav">About Us <span class="lbl nm_label1">New</span> </a></li>
+                            <li><a href="contact-us.html" class="site-nav">Contact Us</a></li>
+                            <li><a href="faqs.html" class="site-nav">FAQs</a></li>
+                      </ul>
+                    </nav>
+                    <!--End Desktop Menu-->
+                </div>
+                <div class="col-6 col-sm-6 col-md-6 col-lg-2 d-block d-lg-none mobile-logo">
+                	<div class="logo">
+                        <a href="index.html">
+                            <img src="assets/images/logo.svg" alt="Belle Multipurpose Html Template" title="Belle Multipurpose Html Template" />
+                        </a>
+                    </div>
+                </div>
+                <div class="col-4 col-sm-3 col-md-3 col-lg-2">
+                	<div class="site-cart">
+                    	<a href="#" class="site-header__cart" title="Cart">
+                        	<i class="icon anm anm-bag-l"></i>
+                            <span id="CartCount" class="site-header__cart-count" data-cart-render="item_count">2</span>
+                        </a>
+                        <!--Minicart Popup-->
+                        <div id="header-cart" class="block block-cart">
+                        	<ul class="mini-products-list">
+                                <li class="item">
+                                	<a class="product-image" href="#">
+                                    	<img src="assets/images/product-images/cape-dress-1.jpg" alt="3/4 Sleeve Kimono Dress" title="" />
+                                    </a>
+                                    <div class="product-details">
+                                    	<a href="#" class="remove"><i class="anm anm-times-l" aria-hidden="true"></i></a>
+                                        <a href="#" class="edit-i remove"><i class="anm anm-edit" aria-hidden="true"></i></a>
+                                        <a class="pName" href="cart.html">Sleeve Kimono Dress</a>
+                                        <div class="variant-cart">Black / XL</div>
+                                        <div class="wrapQtyBtn">
+                                            <div class="qtyField">
+                                            	<span class="label">Qty:</span>
+                                                <a class="qtyBtn minus" href="javascript:void(0);"><i class="fa anm anm-minus-r" aria-hidden="true"></i></a>
+                                                <input type="text" id="Quantity" name="quantity" value="1" class="product-form__input qty">
+                                                <a class="qtyBtn plus" href="javascript:void(0);"><i class="fa anm anm-plus-r" aria-hidden="true"></i></a>
+                                            </div>
+                                        </div>
+                                        <div class="priceRow">
+                                        	<div class="product-price">
+                                            	<span class="money">$59.00</span>
+                                            </div>
+                                         </div>
+									</div>
+                                </li>
+                                <li class="item">
+                                	<a class="product-image" href="#">
+                                    	<img src="assets/images/product-images/cape-dress-2.jpg" alt="Elastic Waist Dress - Black / Small" title="" />
+                                    </a>
+                                    <div class="product-details">
+                                    	<a href="#" class="remove"><i class="anm anm-times-l" aria-hidden="true"></i></a>
+                                        <a href="#" class="edit-i remove"><i class="anm anm-edit" aria-hidden="true"></i></a>
+                                        <a class="pName" href="cart.html">Elastic Waist Dress</a>
+                                        <div class="variant-cart">Gray / XXL</div>
+                                        <div class="wrapQtyBtn">
+                                            <div class="qtyField">
+                                            	<span class="label">Qty:</span>
+                                                <a class="qtyBtn minus" href="javascript:void(0);"><i class="fa anm anm-minus-r" aria-hidden="true"></i></a>
+                                                <input type="text" id="Quantity" name="quantity" value="1" class="product-form__input qty">
+                                                <a class="qtyBtn plus" href="javascript:void(0);"><i class="fa anm anm-plus-r" aria-hidden="true"></i></a>
+                                            </div>
+                                        </div>
+                                       	<div class="priceRow">
+                                            <div class="product-price">
+                                                <span class="money">$99.00</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                            <div class="total">
+                            	<div class="total-in">
+                                	<span class="label">Cart Subtotal:</span><span class="product-price"><span class="money">$748.00</span></span>
+                                </div>
+                                 <div class="buttonSet text-center">
+                                    <a href="cart.html" class="btn btn-secondary btn--small">View Cart</a>
+                                    <a href="checkout.html" class="btn btn-secondary btn--small">Checkout</a>
+                                </div>
+                            </div>
+                        </div>
+                        <!--End Minicart Popup-->
+                    </div>
+                    <div class="site-header__search">
+                    	<button type="button" class="search-trigger"><i class="icon anm anm-search-l"></i></button>
+                    </div>
+                </div>
+        	</div>
+        </div>
+    </div>
+    <!--End Header-->
+    <!--Mobile Menu-->
+    <div class="mobile-nav-wrapper" role="navigation">
+		<div class="closemobileMenu"><i class="icon anm anm-times-l pull-right"></i> Close Menu</div>
+        <ul id="MobileNav" class="mobile-nav">
+        	<li class="lvl1 parent megamenu"><a href="index.html">Home <i class="anm anm-plus-l"></i></a>
+          <ul>
+            <li><a href="#" class="site-nav">Home Group 1<i class="anm anm-plus-l"></i></a>
+              <ul>
+                <li><a href="index.html" class="site-nav">Home 1 - Classic</a></li>
+                <li><a href="home2-default.html" class="site-nav">Home 2 - Default</a></li>
+                <li><a href="home15-funiture.html" class="site-nav">Home 15 - Furniture </a></li>
+                <li><a href="home3-boxed.html" class="site-nav">Home 3 - Boxed</a></li>
+                <li><a href="home4-fullwidth.html" class="site-nav">Home 4 - Fullwidth</a></li>
+                <li><a href="home5-cosmetic.html" class="site-nav">Home 5 - Cosmetic</a></li>
+                <li><a href="home6-modern.html" class="site-nav">Home 6 - Modern</a></li>
+                <li><a href="home7-shoes.html" class="site-nav last">Home 7 - Shoes</a></li>
+              </ul>
+            </li>
+            <li><a href="#" class="site-nav">Home Group 2<i class="anm anm-plus-l"></i></a>
+              <ul>
+                <li><a href="home8-jewellery.html" class="site-nav">Home 8 - Jewellery</a></li>
+                <li><a href="home9-parallax.html" class="site-nav">Home 9 - Parallax</a></li>
+                <li><a href="home10-minimal.html" class="site-nav">Home 10 - Minimal</a></li>
+                <li><a href="home11-grid.html" class="site-nav">Home 11 - Grid</a></li>
+                <li><a href="home12-category.html" class="site-nav">Home 12 - Category</a></li>
+                <li><a href="home13-auto-parts.html" class="site-nav">Home 13 - Auto Parts</a></li>
+                <li><a href="home14-bags.html" class="site-nav last">Home 14 - Bags</a></li>
+              </ul>
+            </li>
+            <li><a href="#" class="site-nav">New Sections<i class="anm anm-plus-l"></i></a>
+              <ul>
+                <li><a href="home11-grid.html" class="site-nav">Image Gallery</a></li>
+                <li><a href="home5-cosmetic.html" class="site-nav">Featured Product</a></li>
+                <li><a href="home7-shoes.html" class="site-nav">Columns with Items</a></li>
+                <li><a href="home6-modern.html" class="site-nav">Text columns with images</a></li>
+                <li><a href="home2-default.html" class="site-nav">Products Carousel</a></li>
+                <li><a href="home9-parallax.html" class="site-nav last">Parallax Banner</a></li>
+              </ul>
+            </li>
+            <li><a href="#" class="site-nav">New Features<i class="anm anm-plus-l"></i></a>
+              <ul>
+                <li><a href="home13-auto-parts.html" class="site-nav">Top Information Bar </a></li>
+                <li><a href="#" class="site-nav">Age Varification </a></li>
+                <li><a href="#" class="site-nav">Footer Blocks</a></li>
+                <li><a href="#" class="site-nav">2 New Megamenu style</a></li>
+                <li><a href="#" class="site-nav">Show Total Savings </a></li>
+                <li><a href="#" class="site-nav">New Custom Icons</a></li>
+                <li><a href="#" class="site-nav last">Auto Currency</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        	<li class="lvl1 parent megamenu"><a href="#">Shop <i class="anm anm-plus-l"></i></a>
+          <ul>
+            <li><a href="#" class="site-nav">Shop Pages<i class="anm anm-plus-l"></i></a>
+              <ul>
+                <li><a href="shop-left-sidebar.html" class="site-nav">Left Sidebar</a></li>
+                <li><a href="shop-right-sidebar.html" class="site-nav">Right Sidebar</a></li>
+                <li><a href="shop-fullwidth.html" class="site-nav">Fullwidth</a></li>
+                <li><a href="shop-grid-3.html" class="site-nav">3 items per row</a></li>
+                <li><a href="shop-grid-4.html" class="site-nav">4 items per row</a></li>
+                <li><a href="shop-grid-5.html" class="site-nav">5 items per row</a></li>
+                <li><a href="shop-grid-6.html" class="site-nav">6 items per row</a></li>
+                <li><a href="shop-grid-7.html" class="site-nav">7 items per row</a></li>
+                <li><a href="shop-listview.html" class="site-nav last">Product Listview</a></li>
+              </ul>
+            </li>
+            <li><a href="#" class="site-nav">Shop Features<i class="anm anm-plus-l"></i></a>
+              <ul>
+                <li><a href="shop-left-sidebar.html" class="site-nav">Product Countdown </a></li>
+                <li><a href="shop-right-sidebar.html" class="site-nav">Infinite Scrolling</a></li>
+
+                <li><a href="shop-grid-3.html" class="site-nav">Pagination - Classic</a></li>
+                <li><a href="shop-grid-6.html" class="site-nav">Pagination - Load More</a></li>
+                <li><a href="product-labels.html" class="site-nav">Dynamic Product Labels</a></li>
+                <li><a href="product-swatches-style.html" class="site-nav">Product Swatches </a></li>
+                <li><a href="product-hover-info.html" class="site-nav">Product Hover Info</a></li>
+                <li><a href="shop-grid-3.html" class="site-nav">Product Reviews</a></li>
+                <li><a href="shop-left-sidebar.html" class="site-nav last">Discount Label </a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        	<li class="lvl1 parent megamenu"><a href="product-layout-1.html">Product <i class="anm anm-plus-l"></i></a>
+          <ul>
+            <li><a href="product-layout-1.html" class="site-nav">Product Page<i class="anm anm-plus-l"></i></a>
+              <ul>
+                <li><a href="product-layout-1.html" class="site-nav">Product Layout 1</a></li>
+                <li><a href="product-layout-2.html" class="site-nav">Product Layout 2</a></li>
+                <li><a href="product-layout-3.html" class="site-nav">Product Layout 3</a></li>
+                <li><a href="product-with-left-thumbs.html" class="site-nav">Product With Left Thumbs</a></li>
+                <li><a href="product-with-right-thumbs.html" class="site-nav">Product With Right Thumbs</a></li>
+                <li><a href="product-with-bottom-thumbs.html" class="site-nav last">Product With Bottom Thumbs</a></li>
+              </ul>
+            </li>
+            <li><a href="short-description.html" class="site-nav">Product Features<i class="anm anm-plus-l"></i></a>
+              <ul>
+                <li><a href="short-description.html" class="site-nav">Short Description</a></li>
+                <li><a href="product-countdown.html" class="site-nav">Product Countdown</a></li>
+                <li><a href="product-video.html" class="site-nav">Product Video</a></li>
+                <li><a href="product-quantity-message.html" class="site-nav">Product Quantity Message</a></li>
+                <li><a href="product-visitor-sold-count.html" class="site-nav">Product Visitor/Sold Count </a></li>
+                <li><a href="product-zoom-lightbox.html" class="site-nav last">Product Zoom/Lightbox </a></li>
+              </ul>
+            </li>
+            <li><a href="#" class="site-nav">Product Features<i class="anm anm-plus-l"></i></a>
+              <ul>
+                <li><a href="product-with-variant-image.html" class="site-nav">Product with Variant Image</a></li>
+                <li><a href="product-with-color-swatch.html" class="site-nav">Product with Color Swatch</a></li>
+                <li><a href="product-with-image-swatch.html" class="site-nav">Product with Image Swatch</a></li>
+                <li><a href="product-with-dropdown.html" class="site-nav">Product with Dropdown</a></li>
+                <li><a href="product-with-rounded-square.html" class="site-nav">Product with Rounded Square</a></li>
+                <li><a href="swatches-style.html" class="site-nav last">Product Swatches All Style</a></li>
+              </ul>
+            </li>
+            <li><a href="#" class="site-nav">Product Features<i class="anm anm-plus-l"></i></a>
+              <ul>
+                <li><a href="product-accordion.html" class="site-nav">Product Accordion</a></li>
+                <li><a href="product-pre-orders.html" class="site-nav">Product Pre-orders </a></li>
+                <li><a href="product-labels-detail.html" class="site-nav">Product Labels</a></li>
+                <li><a href="product-discount.html" class="site-nav">Product Discount In %</a></li>
+                <li><a href="product-shipping-message.html" class="site-nav">Product Shipping Message</a></li>
+                <li><a href="product-shipping-message.html" class="site-nav last">Size Guide </a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        	<li class="lvl1 parent megamenu"><a href="about-us.html">Pages <i class="anm anm-plus-l"></i></a>
+          <ul>
+          	<li><a href="cart-variant1.html" class="site-nav">Cart Page <i class="anm anm-plus-l"></i></a>
+                <ul class="dropdown">
+                    <li><a href="cart-variant1.html" class="site-nav">Cart Variant1</a></li>
+                    <li><a href="cart-variant2.html" class="site-nav">Cart Variant2</a></li>
+                 </ul>
+            </li>
+            <li><a href="compare-variant1.html" class="site-nav">Compare Product <i class="anm anm-plus-l"></i></a>
+                <ul class="dropdown">
+                    <li><a href="compare-variant1.html" class="site-nav">Compare Variant1</a></li>
+                    <li><a href="compare-variant2.html" class="site-nav">Compare Variant2</a></li>
+                 </ul>
+            </li>
+			<li><a href="checkout.html" class="site-nav">Checkout</a></li>
+            <li><a href="about-us.html" class="site-nav">About Us <span class="lbl nm_label1">New</span></a></li>
+            <li><a href="contact-us.html" class="site-nav">Contact Us</a></li>
+            <li><a href="faqs.html" class="site-nav">FAQs</a></li>
+            <li><a href="lookbook1.html" class="site-nav">Lookbook<i class="anm anm-plus-l"></i></a>
+              <ul>
+                <li><a href="lookbook1.html" class="site-nav">Style 1</a></li>
+                <li><a href="lookbook2.html" class="site-nav last">Style 2</a></li>
+              </ul>
+            </li>
+            <li><a href="404.html" class="site-nav">404</a></li>
+            <li><a href="coming-soon.html" class="site-nav">Coming soon<span class="lbl nm_label1">New</span></a></li>
+          </ul>
+        </li>
+        	<li class="lvl1 parent megamenu"><a href="blog-left-sidebar.html">Blog <i class="anm anm-plus-l"></i></a>
+          <ul>
+            <li><a href="blog-left-sidebar.html" class="site-nav">Left Sidebar</a></li>
+            <li><a href="blog-right-sidebar.html" class="site-nav">Right Sidebar</a></li>
+            <li><a href="blog-fullwidth.html" class="site-nav">Fullwidth</a></li>
+            <li><a href="blog-grid-view.html" class="site-nav">Gridview</a></li>
+            <li><a href="blog-article.html" class="site-nav">Article</a></li>
+          </ul>
+        </li>
+        	<li class="lvl1"><a href="#"><b>Buy Now!</b></a>
+        </li>
+      </ul>
+	</div>
+	<!--End Mobile Menu-->
+    
+    <!--Body Content-->
+    <div class="container">
+        <div class="flash-popup" id="flash-popup">
+            {% with messages = get_flashed_messages() %}
+              {% if messages %}
+                <div class="flash-messages">
+                  {% for message in messages %}
+                    <div class="flash-message" role="alert">
+                      {{ message }}
+                    </div>
+                  {% endfor %}
+                </div>
+              {% endif %}
+            {% endwith %}
+          </div>
+
+        <script>
+            // Function to close the flash popup
+            function closeFlashPopup() {
+              var flashPopup = document.getElementById('flash-popup');
+              if (flashPopup) {
+                flashPopup.style.display = 'none';
+              }
+            }
+          
+            // Call the function after a certain time
+            setTimeout(closeFlashPopup, 3000); // Adjust the delay time as needed
+          </script>
+            
+          <div id="page-content">
+            <!--Page Title-->
+            <div class="page section-header text-center">
+                <div class="page-title">
+                    <div class="wrapper"><h1 class="page-width">Shopping Cart</h1></div>
+                  </div>
+            </div>
+        <h1>Your Shopping Cart</h1>
+        <form action="/cart" method="post" class="cart" id="cartForm">
+            <table class="table">
+                <thead>
+                    
+                    <tr>
+                        
+                        <th>Shop Name</th>
+                        <th>Product Name</th>
+                        <th>Variation</th> <!-- Add this column for the Variation -->
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th>Total</th>
+                        <th>Action</th>
+                        
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in cart %}
+                    <tr>
+                        <td>{{ item[6] }}</td> <!-- Shop Name -->
+                        <td>{{ item[0] }}</td> <!-- Product name -->
+                        <td>{{ item[5] }}</td> <!-- Variation -->
+                        <td>₱{{ item[2] }}</td> <!-- Price -->
+                        <td>
+                            <input type="number" name="quantity_{{ item[0] }}" value="{{ item[3]|int }}" min="1" class="quantity-input" onchange="updateCart('{{ item[0] }}', this.value)">
+                        </td>
+                        <td>
+                            <span id="total_{{ item[0] }}">₱{{ item[4] }}</span> <!-- Total -->
+                        </td>
+                        <td>
+                            
+                            <form action="{{ url_for('delete_item') }}" method="post" class="delete-form">
+                                <input type="hidden" name="delete_item" value="{{ item[0] }}">
+                                <button type="submit" class="btn btn-danger">Delete
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                                        <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/>
+                                        <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/>
+                                    </svg>
+                                </button>
+                            </form>
+                            <input type="checkbox" name="selected_items[]" value="{{ item[0] }}" class="item-checkbox" data-shipping-fee="{{ item[7] }}" {% if item[0] in selected_items %}checked{% endif %}>
+
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <button type="submit" name="clear" class="btn btn-danger">Clear Cart</button>
+            <div class="text-right"> <!-- Add text-right class for right alignment -->
+                <div class="subtotal-form">
+                    <h2><b>Subtotal:<span id="subtotal" class="subtotal-value">
+                        ₱{{ subtotal|round(2) }}
+                    </span></h2>
+                    <h2><span class="col-12 col-sm-6 cart__subtotal-title"><b>Shipping:</b></span> <span id="shipping" class="col-12 col-sm-6 text-right">₱0.00</span></h2>
+
+                    
+                    <!-- Add the following lines to display the total with styling -->
+                    <h2><span class="col-12 col-sm-6 cart__subtotal-title"><b>Total:</b></span> <span id="total" class="col-12 col-sm-6 text-right total-value" style="font-size: 250%;">₱{{ total|round(2) }}</span></h2>
+                </div>
+            </div>
+            
+            
+            <form action="/cart" method="post" class="cart" id="cartForm">
+                    
+                    <a href="/checkout" class="btn btn-primary checkout-btn">Proceed to Checkout</a>
+            </form>
+            </div>
+            
+    
+        
+        
+        
+        
+        
+        
+    <!--End Body Content-->
+    <div>
+    <!--Footer-->
+    <footer id="footer">
+        <div class="newsletter-section">
+            <div class="container">
+                <div class="row">
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-7 w-100 d-flex justify-content-start align-items-center">
+                            <div class="display-table">
+                                <div class="display-table-cell footer-newsletter">
+                                    <div class="section-header text-center">
+                                        <label class="h2"><span>sign up for </span>newsletter</label>
+                                    </div>
+                                    <form action="#" method="post">
+                                        <div class="input-group">
+                                            <input type="email" class="input-group__field newsletter__input" name="EMAIL" value="" placeholder="Email address" required="">
+                                            <span class="input-group__btn">
+                                                <button type="submit" class="btn newsletter__submit" name="commit" id="Subscribe"><span class="newsletter__submit-text--large">Subscribe</span></button>
+                                            </span>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-5 d-flex justify-content-end align-items-center">
+                            <div class="footer-social">
+                                <ul class="list--inline site-footer__social-icons social-icons">
+                                    <li><a class="social-icons__link" href="#" target="_blank" title="Belle Multipurpose Bootstrap 4 Template on Facebook"><i class="icon icon-facebook"></i></a></li>
+                                    <li><a class="social-icons__link" href="#" target="_blank" title="Belle Multipurpose Bootstrap 4 Template on Twitter"><i class="icon icon-twitter"></i> <span class="icon__fallback-text">Twitter</span></a></li>
+                                    <li><a class="social-icons__link" href="#" target="_blank" title="Belle Multipurpose Bootstrap 4 Template on Pinterest"><i class="icon icon-pinterest"></i> <span class="icon__fallback-text">Pinterest</span></a></li>
+                                    <li><a class="social-icons__link" href="#" target="_blank" title="Belle Multipurpose Bootstrap 4 Template on Instagram"><i class="icon icon-instagram"></i> <span class="icon__fallback-text">Instagram</span></a></li>
+                                    <li><a class="social-icons__link" href="#" target="_blank" title="Belle Multipurpose Bootstrap 4 Template on Tumblr"><i class="icon icon-tumblr-alt"></i> <span class="icon__fallback-text">Tumblr</span></a></li>
+                                    <li><a class="social-icons__link" href="#" target="_blank" title="Belle Multipurpose Bootstrap 4 Template on YouTube"><i class="icon icon-youtube"></i> <span class="icon__fallback-text">YouTube</span></a></li>
+                                    <li><a class="social-icons__link" href="#" target="_blank" title="Belle Multipurpose Bootstrap 4 Template on Vimeo"><i class="icon icon-vimeo-alt"></i> <span class="icon__fallback-text">Vimeo</span></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+            </div>    
+        </div>
+        <div class="site-footer">
+        	<div class="container">
+     			<!--Footer Links-->
+            	<div class="footer-top">
+                	<div class="row">
+                    	<div class="col-12 col-sm-12 col-md-3 col-lg-3 footer-links">
+                        	<h4 class="h4">Quick Shop</h4>
+                            <ul>
+                            	<li><a href="#">Women</a></li>
+                                <li><a href="#">Men</a></li>
+                                <li><a href="#">Kids</a></li>
+                                <li><a href="#">Sportswear</a></li>
+                                <li><a href="#">Sale</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-12 col-sm-12 col-md-3 col-lg-3 footer-links">
+                        	<h4 class="h4">Informations</h4>
+                            <ul>
+                            	<li><a href="#">About us</a></li>
+                                <li><a href="#">Careers</a></li>
+                                <li><a href="#">Privacy policy</a></li>
+                                <li><a href="#">Terms &amp; condition</a></li>
+                                <li><a href="#">My Account</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-12 col-sm-12 col-md-3 col-lg-3 footer-links">
+                        	<h4 class="h4">Customer Services</h4>
+                            <ul>
+                            	<li><a href="#">Request Personal Data</a></li>
+                                <li><a href="#">FAQ's</a></li>
+                                <li><a href="#">Contact Us</a></li>
+                                <li><a href="#">Orders and Returns</a></li>
+                                <li><a href="#">Support Center</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-12 col-sm-12 col-md-3 col-lg-3 contact-box">
+                        	<h4 class="h4">Contact Us</h4>
+                            <ul class="addressFooter">
+                            	<li><i class="icon anm anm-map-marker-al"></i><p>55 Gallaxy Enque,<br>2568 steet, 23568 NY</p></li>
+                                <li class="phone"><i class="icon anm anm-phone-s"></i><p>(440) 000 000 0000</p></li>
+                                <li class="email"><i class="icon anm anm-envelope-l"></i><p>sales@yousite.com</p></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!--End Footer Links-->
+                <hr>
+                <div class="footer-bottom">
+                	<div class="row">
+                    	<!--Footer Copyright-->
+	                	<div class="col-12 col-sm-12 col-md-6 col-lg-6 order-1 order-md-0 order-lg-0 order-sm-1 copyright text-sm-center text-md-left text-lg-left"><span></span> <a href="templateshub.net">Templates Hub</a></div>
+                        <!--End Footer Copyright-->
+                        <!--Footer Payment Icon-->
+                        <div class="col-12 col-sm-12 col-md-6 col-lg-6 order-0 order-md-1 order-lg-1 order-sm-0 payment-icons text-right text-md-center">
+                        	<ul class="payment-icons list--inline">
+                        		<li><i class="icon fa fa-cc-visa" aria-hidden="true"></i></li>
+                                <li><i class="icon fa fa-cc-mastercard" aria-hidden="true"></i></li>
+                                <li><i class="icon fa fa-cc-discover" aria-hidden="true"></i></li>
+                                <li><i class="icon fa fa-cc-paypal" aria-hidden="true"></i></li>
+                                <li><i class="icon fa fa-cc-amex" aria-hidden="true"></i></li>
+                                <li><i class="icon fa fa-credit-card" aria-hidden="true"></i></li>
+                            </ul>
+                        </div>
+                        <!--End Footer Payment Icon-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+</div>
+    <!--End Footer-->
+    <!--Scoll Top-->
+    <span id="site-scroll"><i class="icon anm anm-angle-up-r"></i></span>
+    <!--End Scoll Top-->
+    
+     <!-- Including Jquery -->
+     <script src="/static/assets/js/vendor/jquery-3.3.1.min.js"></script>
+     <script src="/static/assets/js/vendor/jquery.cookie.js"></script>
+     <script src="/static/assets/js/vendor/modernizr-3.6.0.min.js"></script>
+     <script src="/static/assets/js/vendor/wow.min.js"></script>
+     <!-- Including Javascript -->
+     <script src="/static/assets/js/bootstrap.min.js"></script>
+     <script src="/static/assets/js/plugins.js"></script>
+     <script src="/static/assets/js/popper.min.js"></script>
+     <script src="/static/assets/js/lazysizes.js"></script>
+     <script src="/static/assets/js/main.js"></script>
+
+
+     <script>
+        function updateCart(productName, quantity) {
+            fetch('/update-cart', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    productName: productName,
+                    quantity: quantity,
+                }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Update the total and subtotal values on the page
+                document.getElementById('subtotal').innerText = `₱${data.subtotal.toFixed(2)}`;
+
+                // Update the total for the specific product
+                const totalElement = document.getElementById(`total_${productName}`);
+                if (totalElement) {
+                    totalElement.innerText = `₱${(data.total).toFixed(2)}`;
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        }
+    </script>
+
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        // JavaScript for handling Add to Cart and Update Cart
+        $(document).ready(function() {
+            $(".add-to-cart").click(function() {
+                var product = $(this).data("product");
+                var price = parseFloat($(this).data("price"));
+                var quantity = 1; // You can adjust the quantity as needed
+
+                // Send an AJAX request to add the product to the cart
+                $.ajax({
+                    type: "POST",
+                    url: "/update_cart",
+                    data: JSON.stringify({ productName: product, newQuantity: quantity }),
+                    contentType: "application/json",
+                    success: function(response) {
+                        if (response.success) {
+                            var itemTotal = response.newTotal;
+                            var subtotal = response.newSubtotal;
+                            var cartTotal = response.newCartTotal;
+
+                            // Update the cart and total amounts on the page
+                            $("#cart").append("<li>" + product + " - $" + price.toFixed(2) + " x " + quantity + " = $" + itemTotal.toFixed(2) + "</li>");
+                            $("#cart-total").text(cartTotal.toFixed(2));
+                        } else {
+                            alert("Failed to add the product to the cart.");
+                        }
+                    },
+                    error: function() {
+                        alert("Failed to add the product to the cart.");
+                    }
+                });
+            });
+        });
+    </script>
+
+
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+<!-- Add a script for handling AJAX -->
+<script>
+    $(document).ready(function () {
+        $('#cart-form').on('submit', function (event) {
+            event.preventDefault();
+
+            // Your existing form data
+            var formData = $(this).serialize();
+
+            // AJAX request
+            $.ajax({
+                type: 'POST',
+                url: '/cart',
+                data: formData,
+                success: function (data) {
+                    // Update the cart on the page (if needed)
+                    console.log('Cart updated successfully');
+                },
+                error: function (error) {
+                    console.error('Error updating cart', error);
+                }
+            });
+        });
+    });
+</script>
+
+
+
+<script>
+    // Function to update total based on selected checkboxes
+    function updateTotal() {
+        var selectedItems = document.querySelectorAll('.item-checkbox:checked');
+        var subtotal = 0;
+        var totalShippingFee = 0;
+
+        selectedItems.forEach(function (item) {
+            var itemId = item.value;
+            var itemTotal = parseFloat(document.getElementById('total_' + itemId).innerText.replace('₱', ''));
+            subtotal += itemTotal;
+
+            // Get the shipping fee associated with the selected item
+            var itemShippingFee = parseFloat(item.getAttribute('data-shipping-fee'));
+            totalShippingFee += itemShippingFee;
+        });
+
+        var total = subtotal + totalShippingFee;
+
+        document.getElementById('subtotal').innerText = '₱' + subtotal.toFixed(2);
+        document.getElementById('shipping').innerText = '₱' + totalShippingFee.toFixed(2);
+        document.getElementById('total').innerText = '₱' + total.toFixed(2);
+
+        // Store the selected checkboxes in sessionStorage
+        var selectedItemsArray = Array.from(selectedItems).map(function (checkbox) {
+            return checkbox.value;
+        });
+        sessionStorage.setItem('selectedItems', JSON.stringify(selectedItemsArray));
+
+        // Show or hide the cart summary based on the checkbox state
+        var cartSummary = document.getElementById('cart-summary');
+        if (selectedItems.length > 0) {
+            cartSummary.style.display = 'block';
+        } else {
+            cartSummary.style.display = 'none';
+        }
+    }
+
+    // Attach the updateTotal function to checkbox change events
+    var checkboxes = document.querySelectorAll('.item-checkbox');
+    checkboxes.forEach(function (checkbox) {
+        checkbox.addEventListener('change', updateTotal);
+    });
+
+    // On page load, retrieve selected checkboxes from sessionStorage and update total
+    window.onload = function () {
+        var selectedItems = sessionStorage.getItem('selectedItems');
+        if (selectedItems) {
+            selectedItems = JSON.parse(selectedItems);
+            selectedItems.forEach(function (itemId) {
+                var checkbox = document.querySelector('.item-checkbox[value="' + itemId + '"]');
+                if (checkbox) {
+                    checkbox.checked = true;
+                }
+            });
+
+            // Update the total based on the selected checkboxes
+            updateTotal();
+        }
+    };
+</script>
+
+
+
+<script>
+    function showProfileMenu() {
+        var imageFilename = "{{ image_filename }}";  // This will be replaced with the actual filename
+
+        Swal.fire({
+            html: `
+                <div class="center-wrapper">
+                    <div class="circle">
+                        <img src="{{ url_for('uploaded_file', image_filename=imageFilename) }}" alt="profile Image">
+                    </div>
+                </div>
+                <a class="dropdown-item" href="/prof">MY PROFILE</a>
+                <a class="dropdown-item" href="{{ url_for('LOGOUT') }}">LOGOUT</a>
+            `,
+            showCloseButton: true,
+            showConfirmButton: false,
+            backdrop: false,
+        });
+    }
+</script>
+
+
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.4/dist/sweetalert2.min.js"></script>
+</body>
+
+<!-- belle/cart-variant1.html   11 Nov 2019 12:44:32 GMT -->
+</html>

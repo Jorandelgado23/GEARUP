@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Document</title>
+    <meta name="description" content="description">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+     <!-- Your custom styles -->
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+            integrity="sha512-1qcd0MDiccMmJ3fr4z2APtCwSov+g8qE7a1IaQz5yblLEZNLNT5WLC/Bp9QpLbkL1Ix9MTEUwHkjhFVplYAfaA=="
+            crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.4/dist/sweetalert2.min.css">
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/static/assets/images/logocosmic/logo.png" />
+    <!-- Plugins CSS -->
+    <link rel="stylesheet" href="/static/assets/css/plugins.css">
+    <!-- Bootstap CSS -->
+    <link rel="stylesheet" href="/static/assets/css/bootstrap.min.css">
+    <!-- Main Style CSS -->
+    <link rel="stylesheet" href="/static/assets/css/style.css">
+    <link rel="stylesheet" href="/static/assets/css/responsive.css">
+ <style>
+   
+    .logo {
+        display: flex;
+        align-items: center;
+    }
+    
+    .logo a {
+        text-decoration: none; /* Remove underline from the anchor */
+        display: block; /* Make the anchor a block-level element */
+    }
+    
+    .logo img {
+        max-width: 50%; /* Make sure the image doesn't exceed its container */
+        height: auto; /* Maintain aspect ratio */
+        border-radius: 8px; /* Add some border-radius for a rounded look */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow for a lifted appearance */
+    }
+    
+    /* Optional: Add some margin or padding for spacing */
+    .logo {
+        margin-bottom: 20px;
+    }
+
+
+
+.shopping-cart .product-item .product-thumb,
+.shopping-cart .product-item .product-info,
+.wishlist-table .product-item .product-thumb,
+.wishlist-table .product-item .product-info,
+.order-table .product-item .product-thumb,
+.order-table .product-item .product-info {
+    display: table-cell;
+    vertical-align: top
+}
+
+.shopping-cart .product-item .product-thumb,
+.wishlist-table .product-item .product-thumb,
+.order-table .product-item .product-thumb {
+    width: 130px;
+    padding-right: 20px
+}
+
+.list-group-item i {
+    margin-top: -4px;
+    margin-right: 8px;
+    font-size: 1.1em;
+}
+
+.swal2-container {
+    height: 200px;
+    display: flex;
+    flex-direction: row-reverse; /* Align the container to the right side */
+}
+
+.swal2-popup {
+    max-width: 300px; /* Set the maximum width of the popup */
+    text-align: left; /* Align text to the left */
+}
+
+.swal2-icon {
+    margin: 15px; /* Add margin to the icon */
+    width: 30px; /* Set the width of the icon */
+    height: 30px; /* Set the height of the icon */
+}
+
+.swal2-content {
+    padding: 15px; /* Add padding to the content */
+}
+
+.swal2-actions {
+    justify-content: flex-end; /* Align actions to the right side */
+}
+
+
+  .card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+
+.card-body {
+    padding: 20px;
+}
+
+/* Style for Navigation */
+
+
+
+
+/* Style for Wishlist Table */
+.wishlist-table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.wishlist-table th, .wishlist-table td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: left;
+}
+
+.wishlist-table th {
+    background-color: #f8f9fa;
+    font-weight: bold;
+}
+.nav-link.active {
+    font-weight: bold;
+    border-bottom: 2px solid #007bff;
+}
+  .container-xl {
+            margin-left: 5%;
+            margin-right: 5%;
+        }
+
+        .img-account-profile {
+            width: 150px; /* Adjust the width to your desired size */
+            height: 150px; /* Adjust the height to your desired size */
+            border-radius: 50%; /* Remove the border-radius for a square shape */
+            /* Add any additional styling you need */
+        
+            /* Responsive Styles */
+            @media (max-width: 768px) {
+                /* Adjust the styles for devices with a screen width of 768px or less */
+                width: 100px;
+                height: 100px;
+            }
+        
+            @media (max-width: 480px) {
+                /* Adjust the styles for devices with a screen width of 480px or less */
+                width: 80px;
+                height: 80px;
+            }
+        }
+         
+ </style>
+</head>
+<body class="page-template belle">
+
+    
+    <div class="pageWrapper">
+        <!-- Include the search form -->
+        <div class="search">
+            <div class="search__form">
+                <form class="search-bar__form" action="{{ url_for('search') }}" method="post">
+                    <button class="go-btn search__button" type="submit"><i class="icon anm anm-search-l"></i></button>
+                    <input class="search__input" type="search" name="search_query" value="" placeholder="Search entire store..." aria-label="Search" autocomplete="off">
+                </form>
+                <button type="button" class="search-trigger close-btn"><i class="anm anm-times-l"></i></button>
+            </div>
+        </div>
+        <!--Top Header-->
+        <div class="top-header">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-10 col-sm-8 col-md-5 col-lg-4">
+                        
+                        <p class="phone-no"><i class="anm anm-phone-s"></i>091234567</p>
+                    </div>
+                    <div class="col-sm-4 col-md-4 col-lg-4 d-none d-lg-none d-md-block d-lg-block">
+                        <div class="text-center"><p class="top-header_middle-text">COSMIC PHILIPPINES</p></div>
+                    </div>
+                     <!-- User Menu -->
+                     <div class="col-2 col-sm-4 col-md-3 col-lg-4 text-right">
+                        <span class="user-menu d-block d-lg-none" data-toggle="modal" data-target="#userMenuModal">
+                            <i class="anm anm-user-al" aria-hidden="true"></i>
+                        </span>
+                        <ul class="customer-links list-inline">
+                            {% if logged_in %}
+                            <li class="nav-item">
+                                <a class="nav-link bi bi-person-circle" href="#" onclick="showProfileMenu()">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+                                        <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
+                                        <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
+                                    </svg>
+                                    {{ email_name }}
+                                </a>
+                            </li>
+                            {% else %}
+                            <li class="nav-item">
+                                <a class="nav-link bi bi-person-circle" href="{{ url_for('login') }}">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+                                        <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
+                                        <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
+                                    </svg>
+                                    Log In
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ url_for('register') }}">Create Account</a>
+                            </li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                    
+                    <!-- End User Menu -->
+                </div>
+            </div>
+        </div>
+        <!--End Top Header-->
+        <!--Header-->
+        <div class="header-wrap classicHeader animated d-flex">
+            <div class="container-fluid">        
+                <div class="row align-items-center">
+                    <!--Desktop Logo-->
+                    <div class="logo col-md-1 col-lg-2 d-none d-lg-block">
+                        <a href="{{ url_for('index') }}">
+                            <img src="/static/assets/images/logocosmic/LOGO1.png" alt="Belle Multipurpose Html Template" title="Belle Multipurpose Html Template" />
+                        </a>
+                    </div>
+                    <!--End Desktop Logo-->
+                    <div class="col-5 col-sm-3 col-md-3 col-lg-8">
+                        <div class="d-block d-lg-none">
+                            <button type="button" class="btn--link site-header__menu js-mobile-nav-toggle mobile-nav--open">
+                                <i class="icon anm anm-times-l"></i>
+                                <i class="anm anm-bars-r"></i>
+                            </button>
+                        </div>
+                        <!--Desktop Menu-->
+                        <nav class="grid__item" id="AccessibleNav"><!-- for mobile -->
+                            <ul id="siteNav" class="site-nav medium center hidearrow">
+                                <li class="lvl1 parent megamenu"><a href="{{ url_for('index') }}">Home <i class="anm anm-angle-down-l"></i></a>
+    
+                                </li>
+                                <li class="lvl1 parent megamenu"><a href="{{ url_for('shop') }}">Shop <i class="anm anm-angle-down-l"></i></a>
+                                    
+                                </li>
+                            <li class="lvl1 parent megamenu"><a href="{{ url_for('aboutus') }}">About Us <i class="anm anm-angle-down-l"></i></a>
+                                
+                            </li>
+                            <li class="lvl1 parent dropdown"><a href="#">Pages <i class="anm anm-angle-down-l"></i></a>
+                              <ul class="dropdown">
+                                  <li><a href="{{ url_for('cart') }}" class="site-nav">Cart Page <i class="anm anm-angle-right-l"></i></a></li>
+                                <li><a href="{{ url_for('checkout') }}" class="site-nav">Checkout</a></li>
+    
+                                <li><a href="contact-us.html" class="site-nav">Contact Us</a></li>
+                                <li><a href="faqs.html" class="site-nav">FAQs</a></li>
+                          </ul>
+                        </nav>
+                    </div>
+                    
+                        <!--End Desktop Menu-->
+                        <div class="container mt-4">
+                            <div class="row flex-nowrap">
+                                <div class="col-xl-4">
+                                    <!-- Profile Picture Card -->
+                                    <div class="card mb-5 mb-xl-0">
+                                        <div class="card-header">Profile Picture</div>
+                                        <div class="card-body text-center">
+                                            <form action="{{ url_for('update_picture') }}" method="post" enctype="multipart/form-data" id="profile-form">
+                                                {% if image_filename %}
+                                                <!-- Profile picture image -->
+                                                <img class="img-account-profile mb-2 img-fluid" src="{{ url_for('uploaded_file', image_filename=image_filename) }}" alt="profile Image">
+                                                <div class="custom-file mt-3">
+                                                    <input type="file" class="custom-file-input" name="new_profile_picture" accept="image/png, image/jpeg" id="update-input" style="display: none" />
+                                                    <label class="custom-file-label" for="update-input">Choose file</label>
+                                                </div>
+                                                <button class="btn btn-primary mt-2" type="submit">Update Profile Picture</button>
+                                                {% else %}
+                                                <!-- Profile picture help block -->
+                                                <div class="small font-italic text-muted mb-4">JPG or PNG no larger than 5 MB</div>
+                                                <!-- Profile picture upload button -->
+                                                <div class="custom-file">
+                                                    <input type="file" class="custom-file-input" name="new_profile_picture" accept="image/png, image/jpeg" id="upload-input" />
+                                                    <label class="custom-file-label" for="upload-input">Choose file</label>
+                                                </div>
+                                                <button class="btn btn-primary mt-2" type="button" id="toggle-button">Update</button>
+                                                <button class="btn btn-primary mt-2" type="submit" style="display: none" id="upload-button">Upload new image</button>
+                                                {% endif %}
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <!-- Navigation Card -->
+                                    <div class="card mb-4 mb-xl-0">
+                                        <nav class="grid__item">
+                                            <a class="nav-link" href="{{ url_for('prof') }}">Profile</a>
+                                            <a class="nav-link" href="{{ url_for('order_detail') }}">My Purchase</a>
+                                            <a class="nav-link" href="" target="__blank">Wallet</a>
+                                            <a class="nav-link" href="">My Address</a>
+                                            <a class="nav-link active ms-0" href="{{ url_for('WISHLIST') }}">Wishlist</a>
+                                        </nav>
+                                    </div>
+                                </div>
+                                <div class="col-lg-8">
+                                    <!-- Wishlist Table -->
+                                    <div class="padding-top-2x mt-3 hidden-lg-up"></div>
+                                    <div class="wishlist-table table-content table-responsive" style="max-height: 400px; overflow-y: auto;">
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th style="text-align: center; font-size: 30px;">MY WISHLIST</th>
+                                                    <th class="text-center">
+                                                        <form method="POST" action="{{ url_for('clear_wishlist') }}">
+                                                            <button type="submit" class="btn btn-sm btn-outline-danger">Clear Wishlist</button>
+                                                        </form>
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {% if wishlist %}
+                                                    {% for product in wishlist %}
+                                                        <tr>
+                                                            <td>
+                                                                <div class="product-item">
+                                                                    <a class="product-thumb" href="{{ url_for('product_by_name', product_name=product[1]) }}">
+                                                                        <img src="{{ url_for('uploaded_file', image_filename=product[2]) }}" alt="{{ product[1] }}" class="img-fluid">
+                                                                    </a>
+                                                                    <div class="product-info">
+                                                                        <h4 class="product-title">
+                                                                            <a href="{{ url_for('product_by_name', product_name=product[1]) }}">{{ product[1] }}</a>
+                                                                        </h4>
+                                                                        <div class="text-lg text-medium text-muted">₱{{ product[3] }}</div>
+                                                                        <div>Availability:
+                                                                            <div class="d-inline text-success">{{ "In Stock" if product[4] > 0 else "Out of Stock" }}</div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                            <td class="text-center">
+                                                                <form method="POST" action="{{ url_for('remove_from_wishlist', product_id=product[0]) }}">
+                                                                    <button type="submit" class="btn btn-sm btn-outline-danger">Remove</button>
+                                                                </form>
+                                                            </td>
+                                                        </tr>
+                                                    {% endfor %}
+                                                {% else %}
+                                                    <tr>
+                                                        <td colspan="2" class="text-center">Your wishlist is empty.</td>
+                                                    </tr>
+                                                {% endif %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>                                
+                </div>        
+            </div>
+        </div>
+    </div>
+     
+    <script src="/static/assets/js/vendor/jquery-3.3.1.min.js"></script>
+     <script src="/static/assets/js/vendor/jquery.cookie.js"></script>
+     <script src="/static/assets/js/vendor/modernizr-3.6.0.min.js"></script>
+     <script src="/static/assets/js/vendor/wow.min.js"></script>
+     <!-- Including Javascript -->
+     <script src="/static/assets/js/bootstrap.min.js"></script>
+     <script src="/static/assets/js/plugins.js"></script>
+     <script src="/static/assets/js/popper.min.js"></script>
+     <script src="/static/assets/js/lazysizes.js"></script>
+     <script src="/static/assets/js/main.js"></script>
+
+     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+
+    <script>
+        function showProfileMenu() {
+            Swal.fire({
+                html: `
+                    <a class="dropdown-item" href="/prof">MY PROFILE</a>
+                    <a class="dropdown-item" href="{{ url_for('LOGOUT') }}">LOGOUT</a>
+                `,
+                showCloseButton: true,
+                showConfirmButton: false,
+                backdrop: false,
+            });
+        }
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.4/dist/sweetalert2.min.js"></script>
+</body>
+</html>

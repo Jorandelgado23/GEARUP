@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+            integrity="sha512-1qcd0MDiccMmJ3fr4z2APtCwSov+g8qE7a1IaQz5yblLEZNLNT5WLC/Bp9QpLbkL1Ix9MTEUwHkjhFVplYAfaA=="
+            crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.4/dist/sweetalert2.min.css">
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/static/assets/images/logocosmic/logo.png" />
+    <!-- Plugins CSS -->
+    <link rel="stylesheet" href="/static/assets/css/plugins.css">
+    <!-- Bootstap CSS -->
+    <link rel="stylesheet" href="/static/assets/css/bootstrap.min.css">
+    <!-- Main Style CSS -->
+    <link rel="stylesheet" href="/static/assets/css/style.css">
+    <link rel="stylesheet" href="/static/assets/css/responsive.css">
+    <title>{{ seller.shop_name }} - Shop</title>
+    <!-- Include your CSS and JavaScript files here if needed -->
+</head>
+<body>
+<style>
+    .product-name a {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        white-space: normal;
+    }
+</style>
+
+
+<body>
+    <div class="pageWrapper">
+        <!-- Include the search form -->
+        <div class="search">
+            <div class="search__form">
+                <form class="search-bar__form" action="{{ url_for('search') }}" method="post">
+                    <div class="search-inputs">
+                        <input class="search__input" type="search" name="search_query" value="" placeholder="Search entire store..." aria-label="Search" autocomplete="on">
+                        <select class="search__category" name="category">
+                            <option value="">All Categories</option>
+                            {% for category in categories %}
+                                <option value="{{ category }}">{{ category }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <button class="go-btn search__button" type="submit"><i class="icon anm anm-search-l"></i></button>
+                </form>
+                <button type="button" class="search-trigger close-btn"><i class="anm anm-times-l"></i></button>
+            </div>
+        </div>
+        
+        <!--Top Header-->
+     <div class="top-header">
+        <div class="container-fluid">
+            <div class="row">
+            	<div class="col-10 col-sm-8 col-md-5 col-lg-4">
+                    
+                    <p class="phone-no"><i class="anm anm-phone-s"></i>091234567</p>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4 d-none d-lg-none d-md-block d-lg-block">
+                	<div class="text-center"><p class="top-header_middle-text">COSMIC PHILIPPINES</p></div>
+                </div>
+                
+                 <!-- User Menu -->
+<!-- User Menu -->
+<div class="col-2 col-sm-4 col-md-3 col-lg-4 text-right">
+    <span class="user-menu d-block d-lg-none" data-toggle="modal" data-target="#userMenuModal">
+        <i class="anm anm-user-al" aria-hidden="true"></i>
+    </span>
+    <ul class="customer-links list-inline">
+        {% if logged_in %}
+            <li class="nav-item">
+                {% if user_exist %}
+                    <a class="nav-link" href="/sellerpage">View Shop</a>
+                {% else %}
+                    <a class="nav-link" href="{{ url_for('seller_registration') }}">Start Selling</a>
+                {% endif %}
+            </li>
+            <li class="nav-item">
+                <a class="nav-link bi bi-person-circle" href="#" onclick="showProfileMenu()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+                        <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
+                        <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
+                    </svg>
+                    {{ email }}
+                    <i class="bi bi-caret-down-square-fill">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-square-fill" viewBox="0 0 16 16">
+                            <path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm4 4a.5.5 0 0 0-.374.832l4 4.5a.5.5 0 0 0 .748 0l4-4.5A.5.5 0 0 0 12 6z"/>
+                        </svg>
+                    </i>
+                </a>
+            </li>
+        {% else %}
+            <li class="nav-item">
+                <a class="nav-link bi bi-person-circle" href="{{ url_for('login') }}">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+                        <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
+                        <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
+                    </svg>
+                    Log In
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('register') }}">Create Account</a>
+            </li>
+        {% endif %}
+    </ul>
+</div>
+<!-- End User Menu -->
+
+
+
+            </div>
+        </div>
+    </div>
+    <!--End Top Header-->
+    <!--Header-->
+    <div class="header-wrap animated d-flex">
+    	<div class="container-fluid">        
+            <div class="row align-items-center">
+            	<!--Desktop Logo-->
+                <div class="logo col-md-1 col-lg-2 d-none d-lg-block">
+                    <a href="{{ url_for('index') }}">
+                        <img src="/static/assets/images/logocosmic/LOGO1.png" alt="Belle Multipurpose Html Template" title="Belle Multipurpose Html Template">
+                    </a>
+                </div>
+                <!--End Desktop Logo-->
+                <div class="col-2 col-sm-3 col-md-3 col-lg-8">
+                	<div class="d-block d-lg-none">
+                        <button type="button" class="btn--link site-header__menu js-mobile-nav-toggle mobile-nav--open">
+                        	<i class="icon anm anm-times-l"></i>
+                            <i class="anm anm-bars-r"></i>
+                        </button>
+                    </div>
+                	<!--Desktop Menu-->
+                	<nav class="grid__item" id="AccessibleNav"><!-- for mobile -->
+                        <ul id="siteNav" class="site-nav medium center hidearrow">
+                            <li class="lvl1 parent megamenu"><a href="{{ url_for('index') }}">Home <i class="anm anm-angle-down-l"></i></a>
+
+                            </li>
+                            <li class="lvl1 parent megamenu"><a href="{{ url_for('shop') }}">Shop <i class="anm anm-angle-down-l"></i></a>
+                            	
+                            </li>
+                            <li class="lvl1 parent megamenu"><a href="{{ url_for('aboutus') }}">About Us <i class="anm anm-angle-down-l"></i></a>
+                        	
+                        </li>
+                        <li class="lvl1 parent dropdown"><a href="#">Pages <i class="anm anm-angle-down-l"></i></a>
+                          <ul class="dropdown">
+                          	<li><a href="{{ url_for('cart') }}" class="site-nav">Cart Page</a></li>
+							<li><a href="{{ url_for('checkout') }}" class="site-nav">Checkout</a></li>
+                            <li><a href="contact-us.html" class="site-nav">Contact Us</a></li>
+                            <li><a href="faqs.html" class="site-nav">FAQs</a></li>
+                      </ul>
+                    </nav>
+                    <!--End Desktop Menu-->
+                </div>
+                <div class="col-6 col-sm-6 col-md-6 col-lg-2 d-block d-lg-none mobile-logo">
+                	<div class="logo">
+                        <a href="index.html">
+                            <img src="/static/assets/images/logo.svg" alt="Belle Multipurpose Html Template" title="Belle Multipurpose Html Template" />
+                        </a>
+                    </div>
+                </div>
+                <div class="col-3 col-sm-2 col-md-1 col-lg-1">
+                    <div class="site-header__search ml-3">
+                    	<button type="button" class="search-trigger"><i class="icon anm anm-search-l"></i></button>
+                    </div>
+                	<div class="site-cart">
+                    	<a href="#;" class="site-header__cart" title="Cart">
+                        	<i class="icon anm anm-bag-l"></i>
+                            <span id="CartCount" class="site-header__cart-count" data-cart-render="item_count">2</span>
+                        </a>
+                        <!--Minicart Popup-->
+                        <div id="header-cart" class="block block-cart">
+                                 <div class="buttonSet text-center">
+                                    <a href="cart.html" class="btn btn-secondary btn--small">View Cart</a>
+                                    <a href="checkout.html" class="btn btn-secondary btn--small">Checkout</a>
+                                </div>
+                            </div>
+                        </div>
+                        <!--End Minicart Popup-->
+                    </div>
+                </div>
+        	</div>
+        </div>
+    </div>
+    <!--End Header-->
+
+    
+    <!-- Collection Banner -->
+    <div class="collection-header">
+        <div class="collection-hero">
+            <div class="collection-hero__image">
+               
+            </div>
+            <div class="collection-hero__title-wrapper">
+                <h1 class="collection-hero__title page-width">{{ shop_name }}</h1>
+            </div>
+        </div>
+    </div>
+    
+    <div class="container">
+        <div class="row">
+            <!-- Sidebar -->
+            <div class="col-12 col-sm-12 col-md-3 col-lg-3 sidebar filterbar">
+                <div class="closeFilter d-block d-md-none d-lg-none"><i class="icon icon anm anm-times-l"></i></div>
+                <div class="sidebar_tags">
+                  
+
+                    <!-- Seller Image -->
+                   
+
+                    <!-- Shop Information -->
+                    <div class="sidebar_widget">
+                        <div class="widget-title"><h2 style="font-weight: bold;">SHOP INFORMATION</h2></div>
+                        <div class="widget-content">
+                            <p style="font-weight: bold;">NAME:{{ first }}  {{ last }}  </p>
+                            <br>
+                            <p style="font-weight: bold;">LOCATION: {{location}} </p>
+                            <br>
+                            <p style="font-weight: bold;">Contact: {{ contact }}</p>
+                        </div>
+                    </div>
+                    <!-- End Shop Information -->
+                </div>
+            </div>
+            <!-- End Sidebar -->
+
+            <!-- Main Content -->
+            <div class="col-12 col-sm-12 col-md-9 col-lg-9 main-col">
+                <div class="category-description">
+                    <!-- Your existing category description content here -->
+                    <hr>
+                </div>
+                <div class="productList">
+                    <!-- Toolbar -->
+                    <button type="button" class="btn btn-filter d-block d-md-none d-lg-none"> Product Filters</button>
+                    <div class="toolbar">
+                        <div class="filters-toolbar-wrapper">
+                            <div class="row">
+                                <div class="col-4 col-md-4 col-lg-4 filters-toolbar__item collection-view-as d-flex justify-content-start align-items-center">
+                                    <!-- Your toolbar content here -->
+                                </div>
+                                <div class="col-4 col-md-4 col-lg-4 text-right">
+                                    <!-- Your toolbar content here -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End Toolbar -->
+
+                    <div>
+                        <!--Featured Product-->
+                        <div class="product-rows section">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                                    <div class="section-header text-center">
+                                        <h2 class="h2">SHOP PRODUCTS</h2>
+                                        <!-- <p>Our most popular products based on sales</p> -->
+                                    </div>
+                                </div>
+                            </div>
+                        
+                            <div class="container">
+                                <div class="row">
+                                    {% for product in products %}
+                                    <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                                        <!-- Wrap the product card in a link to navigate to the product page -->
+                                        <a href="{{ url_for('product', product_id=product.id) }}" style="text-decoration: none; color: inherit;">
+                                            <div class="product-card">
+                                                <!-- Product Image -->
+                                                <div class="product-image">
+                                                    <a href="{{ url_for('product', product_id=product[0]) }}">
+                                                        <img class="primary blur-up lazyload" data-src="{{ url_for('uploaded_file', image_filename=product[7]) }}" src="{{ url_for('uploaded_file', image_filename=product[7]) }}" alt="{{ product[1] }}" title="{{ product[1] }}">
+                                                    </a>
+                                                    <!-- Product Labels (you may need to adjust this based on your product properties) -->
+                                                    <div class="product-labels rectangular">
+                                                        {% if product.on_sale %}
+                                                            <span class="lbl on-sale">On Sale</span>
+                                                            {% if product.discount_rate %}
+                                                                <span class="lbl discount-rate">{{ product.discount_rate }}% Off</span>
+                                                            {% endif %}
+                                                        {% endif %}
+                                                        {% if product.is_new %}
+                                                            <span class="lbl pr-label1">New</span>
+                                                        {% endif %}
+                                                    </div>
+                                                    <!-- End Product Labels -->
+                            
+                                                    <!-- Add to Cart Form -->
+                                            
+                            
+                                                    <!-- Wishlist Button -->
+                            
+                                                    <!-- End Add to Cart Form and Buttons -->
+                                                </div>
+                                                <!-- End Product Image -->
+                            
+                                                <!-- Product Details -->
+                                                <div class="product-details text-center">
+                                                    <!-- Product Name -->
+                                                    <div class="product-name">
+                                                        <a href="{{ url_for('product', product_id=product[0]) }}">{{ product[1]}}</a>
+                                                    </div>
+                                                    <!-- End Product Name -->
+                            
+                                                    <!-- Product Price -->
+                                                    <div class="product-price">
+                                                        {% if product.on_sale %}
+                                                            <span class="original-price">₱{{ product.original_price }}</span>
+                                                            <span class="discounted-price">₱{{ product[10] }}</span>
+                                                        {% else %}
+                                                            <span class="price">₱{{ product[4] }}</span>
+                                                        {% endif %}
+                                                    </div>
+                                                    <!-- End Product Price -->
+                                                </div>
+                                                <!-- End Product Details -->
+                                            </div>
+                                        </a>
+                                        <!-- End of link -->
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            
+                            
+                            
+                    </div>
+
+
+    <script src="/static/assets/js/vendor/jquery-3.3.1.min.js"></script>
+     <script src="/static/assets/js/vendor/jquery.cookie.js"></script>
+     <script src="/static/assets/js/vendor/modernizr-3.6.0.min.js"></script>
+     <script src="/static/assets/js/vendor/wow.min.js"></script>
+     <!-- Including Javascript -->
+     <script src="/static/assets/js/bootstrap.min.js"></script>
+     <script src="/static/assets/js/plugins.js"></script>
+     <script src="/static/assets/js/popper.min.js"></script>
+     <script src="/static/assets/js/lazysizes.js"></script>
+     <script src="/static/assets/js/main.js"></script>
+</body>
+</html>

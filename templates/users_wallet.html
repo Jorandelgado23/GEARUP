@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+            integrity="sha512-1qcd0MDiccMmJ3fr4z2APtCwSov+g8qE7a1IaQz5yblLEZNLNT5WLC/Bp9QpLbkL1Ix9MTEUwHkjhFVplYAfaA=="
+            crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.4/dist/sweetalert2.min.css">
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/static/assets/images/logocosmic/logo.png" />
+    <!-- Plugins CSS -->
+    <link rel="stylesheet" href="/static/assets/css/plugins.css">
+    <!-- Bootstap CSS -->
+    <link rel="stylesheet" href="/static/assets/css/bootstrap.min.css">
+
+    
+    <!-- Main Style CSS -->
+    <link rel="stylesheet" href="/static/assets/css/style.css">
+    <link rel="stylesheet" href="/static/assets/css/responsive.css">
+    <title>User Wallet</title>
+   <style>
+
+    .swal2-container {
+        height: 200px;
+        display: flex;
+        flex-direction: row-reverse; /* Align the container to the right side */
+    }
+
+    .swal2-popup {
+        max-width: 300px; /* Set the maximum width of the popup */
+        text-align: left; /* Align text to the left */
+    }
+
+    .swal2-icon {
+        margin: 15px; /* Add margin to the icon */
+        width: 30px; /* Set the width of the icon */
+        height: 30px; /* Set the height of the icon */
+    }
+
+    .swal2-content {
+        padding: 15px; /* Add padding to the content */
+    }
+
+    .swal2-actions {
+        justify-content: flex-end; /* Align actions to the right side */
+    }
+
+    body {
+        text-align: center;
+    }
+
+    .container {
+        display: inline-block;
+        text-align: left;
+    }
+
+    h1, h2, p, ul {
+        margin: 0;
+        padding: 0;
+    }
+   </style>
+</head>
+<body>
+
+<!--Top Header-->
+<div class="top-header">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-10 col-sm-8 col-md-5 col-lg-4">
+                
+                <p class="phone-no"><i class="anm anm-phone-s"></i>091234567</p>
+            </div>
+            <div class="col-sm-4 col-md-4 col-lg-4 d-none d-lg-none d-md-block d-lg-block">
+                <div class="text-center"><p class="top-header_middle-text">COSMIC PHILIPPINES</p></div>
+            </div>
+            
+             <!-- User Menu -->
+<!-- User Menu -->
+<div class="col-2 col-sm-4 col-md-3 col-lg-4 text-right">
+<span class="user-menu d-block d-lg-none" data-toggle="modal" data-target="#userMenuModal">
+    <i class="anm anm-user-al" aria-hidden="true"></i>
+</span>
+<ul class="customer-links list-inline">
+    {% if logged_in %}
+        <li class="nav-item">
+            {% if user_exist %}
+                <a class="nav-link" href="/sellerpage">View Shop</a>
+            {% else %}
+                <a class="nav-link" href="{{ url_for('seller_registration') }}">Start Selling</a>
+            {% endif %}
+        </li>
+        <li class="nav-item">
+            <a class="nav-link bi bi-person-circle" href="#" onclick="showProfileMenu()">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+                    <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
+                    <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
+                </svg>
+                {{ email }}
+                <i class="bi bi-caret-down-square-fill">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-square-fill" viewBox="0 0 16 16">
+                        <path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm4 4a.5.5 0 0 0-.374.832l4 4.5a.5.5 0 0 0 .748 0l4-4.5A.5.5 0 0 0 12 6z"/>
+                    </svg>
+                </i>
+            </a>
+        </li>
+    {% else %}
+        <li class="nav-item">
+            <a class="nav-link bi bi-person-circle" href="{{ url_for('login') }}">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+                    <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
+                    <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
+                </svg>
+                Log In
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('register') }}">Create Account</a>
+        </li>
+    {% endif %}
+</ul>
+</div>
+<!-- End User Menu -->
+
+     <!--Header-->
+     <div class="header-wrap classicHeader animated d-flex">
+    	<div class="container-fluid">        
+            <div class="row align-items-center">
+            	<!--Desktop Logo-->
+                <div class="logo col-md-1 col-lg-2 d-none d-lg-block">
+                    <a href="{{ url_for('index') }}">
+                        <img src="/static/assets/images/logocosmic/LOGO1.png" alt="Belle Multipurpose Html Template" title="Belle Multipurpose Html Template">
+                    </a>
+                </div>
+                <!--End Desktop Logo-->
+                <div class="col-2 col-sm-3 col-md-3 col-lg-8">
+                	<div class="d-block d-lg-none">
+                        <button type="button" class="btn--link site-header__menu js-mobile-nav-toggle mobile-nav--open">
+                        	<i class="icon anm anm-times-l"></i>
+                            <i class="anm anm-bars-r"></i>
+                        </button>
+                    </div>
+                	<!--Desktop Menu-->
+                	<nav class="grid__item" id="AccessibleNav"><!-- for mobile -->
+                        <ul id="siteNav" class="site-nav medium center hidearrow">
+                            <li class="lvl1 parent megamenu"><a href="{{ url_for('index') }}">Home <i class="anm anm-angle-down-l"></i></a>
+
+                            </li>
+                            <li class="lvl1 parent megamenu"><a href="{{ url_for('shop') }}">Shop <i class="anm anm-angle-down-l"></i></a>
+                            	
+                            </li>
+                        <li class="lvl1 parent megamenu"><a href="{{ url_for('aboutus') }}">About Us <i class="anm anm-angle-down-l"></i></a>
+                        	
+                        </li>
+                        <li class="lvl1 parent dropdown"><a href="#">Pages <i class="anm anm-angle-down-l"></i></a>
+                          <ul class="dropdown">
+                          	<li><a href="{{ url_for('cart') }}" class="site-nav">Cart Page <i class="anm anm-angle-right-l"></i></a></li>
+							<li><a href="{{ url_for('checkout') }}" class="site-nav">Checkout</a></li>
+
+                            <li><a href="contact-us.html" class="site-nav">Contact Us</a></li>
+                            <li><a href="/faqs.html" class="site-nav">FAQs</a></li>
+                      </ul>
+                    </nav>
+                    <!--End Desktop Menu-->
+                </div>
+                <!--Mobile Logo-->
+                <div class="col-6 col-sm-6 col-md-6 col-lg-2 d-block d-lg-none mobile-logo">
+                	<div class="logo">
+                        <a href="index.html">
+                            <img src="/static/assets/images/logo.svg" alt="Belle Multipurpose Html Template" title="Belle Multipurpose Html Template" />
+                        </a>
+                    </div>
+                </div>
+
+    <section>
+    <h1>User Wallet</h1>
+
+    <!-- Display user's wallet balance -->
+    <p>Wallet Balance: ${{ user_wallet_balance }}</p>
+
+    <!-- Form for submitting cash-in requests -->
+    <form method="POST" action="{{ url_for('users_wallet') }}">
+        <label for="user_email">User Email:</label>
+        <input type="email" name="user_email" value="{{ email }}" required>
+        <label for="amount">Amount:</label>
+        <input type="number" name="amount" required>
+        <button type="submit">Submit Cash-In Request</button>
+    </form>
+
+    <!-- Display transaction history or other relevant information -->
+    <h2>Transaction History</h2>
+    <ul>
+        {% for transaction in transaction_history %}
+        <li>{{ transaction.transaction_type }} - {{ transaction.amount }}</li>
+        {% endfor %}
+    </ul>
+</section>
+
+
+
+
+<script>
+    function showProfileMenu() {
+        var imageFilename = "{{ image_filename }}";  // This will be replaced with the actual filename
+
+        Swal.fire({
+            html: `
+                <div class="center-wrapper">
+                    <div class="circle">
+                        <img src="{{ url_for('uploaded_file', image_filename=imageFilename) }}" alt="profile Image">
+                    </div>
+                </div>
+                <a class="dropdown-item" href="/prof">MY PROFILE</a>
+                <a class="dropdown-item" href="{{ url_for('LOGOUT') }}">LOGOUT</a>
+            `,
+            showCloseButton: true,
+            showConfirmButton: false,
+            backdrop: false,
+        });
+    }
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.4/dist/sweetalert2.min.js"></script>
+</body>
+</html>

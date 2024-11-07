@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" integrity="sha512-1qcd0MDiccMmJ3fr4z2APtCwSov+g8qE7a1IaQz5yblLEZNLNT5WLC/Bp9QpLbkL1Ix9MTEUwHkjhFVplYAfaA==" crossorigin="anonymous" />
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/static/assets/images/logocosmic/logo.png" />
+    <!-- Plugins CSS -->
+    <link rel="stylesheet" href="/static/assets/css/plugins.css">
+    <!-- Bootstap CSS -->
+    <link rel="stylesheet" href="/static/assets/css/bootstrap.min.css">
+    <!-- Main Style CSS -->
+    <link rel="stylesheet" href="/static/assets/css/style.css">
+    <link rel="stylesheet" href="/static/assets/css/responsive.css">
+    <style>
+        h1 {
+            text-align: center;
+            color: #83f;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo a {
+            text-decoration: none; /* Remove underline from the anchor */
+            display: block; /* Make the anchor a block-level element */
+        }
+        
+        .logo img {
+            max-width: 50%; /* Make sure the image doesn't exceed its container */
+            height: auto; /* Maintain aspect ratio */
+            border-radius: 8px; /* Add some border-radius for a rounded look */
+        }
+        
+        /* Optional: Add some margin or padding for spacing */
+        .logo {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="pageWrapper">
+        <!-- Include the search form -->
+
+        <!--Top Header-->
+        <div class="top-header">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-10 col-sm-8 col-md-5 col-lg-4">
+
+                        <p class="phone-no"><i class="anm anm-phone-s"></i>091234567</p>
+                    </div>
+                    <div class="col-sm-4 col-md-4 col-lg-4 d-none d-lg-none d-md-block d-lg-block">
+                        <div class="text-center">
+                            <p class="top-header_middle-text">COSMIC PHILIPPINES</p>
+                        </div>
+                    </div>
+                    <!-- User Menu -->
+                    <div class="col-2 col-sm-4 col-md-3 col-lg-4 text-right">
+                        <span class="user-menu d-block d-lg-none" data-toggle="modal" data-target="#userMenuModal">
+                        <i class="anm anm-user-al" aria-hidden="true"></i>
+                    </span>
+                        <ul class="customer-links list-inline">
+                            {% if logged_in %}
+                            <li class="nav-item dropdown">
+                                <a class="nav-link bi bi-person-circle dropdown-toggle" href="#" role="button" id="userDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+                                    <path
+                                        d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
+                                    <path fill-rule="evenodd"
+                                        d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
+                                </svg> {{ email }}
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="userDropdown">
+                                    <a class="dropdown-item" href="#">  
+                                    My Account
+                                </a>
+
+                                    <a class="dropdown-item" href="{{ url_for('LOGOUT') }}">
+                                    Log Out
+                                </a>
+                                </div>
+                            </li>
+                            {% else %}
+                            <li class="nav-item">
+                                <a class="nav-link bi bi-person-circle" href="{{ url_for('login') }}">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+                                    <path
+                                        d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
+                                    <path fill-rule="evenodd"
+                                        d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
+                                </svg> Log In
+                                </a>
+                            </li>
+                            </li>
+                            {% endif %}
+                        </ul>
+                    </div>
+
+                    <!-- End User Menu -->
+                </div>
+            </div>
+        </div>
+        <!--End Top Header-->
+        <!--Header-->
+        <div class="header-wrap animated d-flex">
+            <div class="container-fluid">
+                <div class="row align-items-center">
+                    <!--Desktop Logo-->
+                    <div class="logo col-md-2 col-lg-2 d-none d-lg-block">
+                        <a href="{{ url_for('index') }}">
+                            <img src="/static/assets/images/logocosmic/LOGO1.png" alt="Belle Multipurpose Html Template" title="Belle Multipurpose Html Template" />
+                        </a>
+                    </div>
+                    <!--End Desktop Logo-->
+                    <div class="col-2 col-sm-3 col-md-3 col-lg-8">
+                        <div class="d-block d-lg-none">
+                            <button type="button" class="btn--link site-header__menu js-mobile-nav-toggle mobile-nav--open">
+                        	<i class="icon anm anm-times-l"></i>
+                            <i class="anm anm-bars-r"></i>
+                        </button>
+                        </div>
+                        <!--Desktop Menu-->
+                        <nav class="grid__item" id="AccessibleNav">
+                            <h1>COSMIC SELLERPAGE</h1>
+                        </nav>
+                        <!--End Desktop Menu-->
+                    </div>
+                    <div class="col-6 col-sm-6 col-md-6 col-lg-2 d-block d-lg-none mobile-logo">
+                        <div class="logo">
+                            <a href="index.html">
+                                <img src="/static/assets/images/logo.svg" alt="Belle Multipurpose Html Template" title="Belle Multipurpose Html Template" />
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div>
+        
+    </div>
+
+    <div id="page-content">
+        <div class="collection-header">
+            <div class="collection-hero">
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-sm-12 col-md-2 col-lg-2 sidebar filterbar">
+                    <div class="closeFilter d-block d-md-none d-lg-none">
+                        <i class="icon icon anm anm-times-l"></i>
+                    </div>
+                    <div class="sidebar_tags">
+                        <div class="sidebar_widget categories filter-widget">
+                            <div>
+                                <a href="{{ url_for('seller_dashboard') }}" class="fas fa-home" class="site-nav">Dashboard</a>
+                            </div>
+                            <div class="widget-title">
+                                <h2><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bag-plus" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd" d="M8 7.5a.5.5 0 0 1 .5.5v1.5H10a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0v-1.5H6a.5.5 0 0 1 0-1h1.5V8a.5.5 0 0 1 .5-.5"/>
+                                    <path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1m3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1z"/>
+                                </svg>Order</h2>
+                            </div>
+                            <div class="widget-content">
+                                <ul class="sidebar_categories">
+                                    <li class="level">
+                                        <a href="{{ url_for('user_transaction') }}" class="site-nav">My Orders</a>
+                                    </li>
+                                    <li class="lvl-1">
+                                        <a href="#;" class="site-nav">Cancellation</a>
+                                    </li>
+                                    <li class="lvl-1">
+                                        <a href="#;" class="site-nav">Return and refund</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="widget-title">
+                                <h2><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-shop" viewBox="0 0 16 16">
+                                    <path d="M2.97 1.35A1 1 0 0 1 3.73 1h8.54a1 1 0 0 1 .76.35l2.609 3.044A1.5 1.5 0 0 1 16 5.37v.255a2.375 2.375 0 0 1-4.25 1.458A2.371 2.371 0 0 1 9.875 8 2.37 2.37 0 0 1 8 7.083 2.37 2.37 0 0 1 6.125 8a2.37 2.37 0 0 1-1.875-.917A2.375 2.375 0 0 1 0 5.625V5.37a1.5 1.5 0 0 1 .361-.976l2.61-3.045zm1.78 4.275a1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0 1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0 1.375 1.375 0 1 0 2.75 0V5.37a.5.5 0 0 0-.12-.325L12.27 2H3.73L1.12 5.045A.5.5 0 0 0 1 5.37v.255a1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0M1.5 8.5A.5.5 0 0 1 2 9v6h1v-5a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1v5h6V9a.5.5 0 0 1 1 0v6h.5a.5.5 0 0 1 0 1H.5a.5.5 0 0 1 0-1H1V9a.5.5 0 0 1 .5-.5M4 15h3v-5H4zm5-5a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1zm3 0h-2v3h2z"/>
+                                </svg><i class="bi bi-shop">Product</h2>
+                            </div>
+                            <div class="widget-content">
+                                <ul class="sidebar_categories">
+                                    <li class="level">
+                                        <a href="{{ url_for('my_products') }}" class="site-nav">My product</a>
+                                    </li>
+                                    <li class="lvl-1">
+                                        <a href="/addpr" class="site-nav">Add new product</a>
+                                    </li>
+                                    <li class="lvl-1">
+                                        <a href="#;" class="site-nav">Suspendent product</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="widget-title">
+                                <h2><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-truck" viewBox="0 0 16 16">
+                                    <path d="M0 3.5A1.5 1.5 0 0 1 1.5 2h9A1.5 1.5 0 0 1 12 3.5V5h1.02a1.5 1.5 0 0 1 1.17.563l1.481 1.85a1.5 1.5 0 0 1 .329.938V10.5a1.5 1.5 0 0 1-1.5 1.5H14a2 2 0 1 1-4 0H5a2 2 0 1 1-3.998-.085A1.5 1.5 0 0 1 0 10.5zm1.294 7.456A1.999 1.999 0 0 1 4.732 11h5.536a2.01 2.01 0 0 1 .732-.732V3.5a.5.5 0 0 0-.5-.5h-9a.5.5 0 0 0-.5.5v7a.5.5 0 0 0 .294.456M12 10a2 2 0 0 1 1.732 1h.768a.5.5 0 0 0 .5-.5V8.35a.5.5 0 0 0-.11-.312l-1.48-1.85A.5.5 0 0 0 13.02 6H12zm-9 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2m9 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2"/>
+                                </svg><i class="bi bi-truck">Shipment</h2>
+                            </div>
+                            <div class="widget-content">
+                                <ul class="sidebar_categories">
+                                    <li class="level">
+                                        <a href="" class="site-nav">Mass ship</a>
+                                    </li>
+                                    <li class="lvl-1">
+                                        <a href="" class="site-nav">Shipping setting</a>
+                                    </li>
+                                    <li class="lvl-1">
+                                        <a href="#;" class="site-nav"></a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+                <!-- Including Jquery -->
+                <script src="/static/assets/js/vendor/jquery-3.3.1.min.js"></script>
+                <script src="/static/assets/js/vendor/jquery.cookie.js"></script>
+                <script src="/static/assets/js/vendor/modernizr-3.6.0.min.js"></script>
+                <script src="/static/assets/js/vendor/wow.min.js"></script>
+                <!-- Including Javascript -->
+                <script src="/static/assets/js/bootstrap.min.js"></script>
+                <script src="/static/assets/js/plugins.js"></script>
+                <script src="/static/assets/js/popper.min.js"></script>
+                <script src="/static/assets/js/lazysizes.js"></script>
+                <script src="/static/assets/js/main.js"></script>
+
+
+                <script>
+                    // JavaScript function to close the modal
+                    function closeModal() {
+                        $('.modal').modal('hide');
+                    }
+
+                    // Attach the closeModal function to the close-icon buttons
+                    $(document).ready(function() {
+                        $('.close-icon').click(function() {
+                            closeModal();
+                        });
+                    });
+                </script>
+
+                <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.4/dist/sweetalert2.min.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html>
+  <head> 
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>SELLER DASHBOARD</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="all,follow">
+    <!-- Bootstrap CSS-->
+    <link rel="stylesheet" href="/static/assets/css/bootstrap.min.css">
+    <!-- Font Awesome CSS-->
+    <link rel="stylesheet" href="/static/assets/vendor/font-awesome/css/font-awesome.css">
+    <!-- Custom Font Icons CSS-->
+    <link rel="stylesheet" href="/static/assets/css/font.css">
+    <!-- Google fonts - Muli-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Muli:300,400,700">
+    <!-- theme stylesheet-->
+    <link rel="stylesheet" href="/static/assets/css/style.default.css" id="theme-stylesheet">
+    <!-- Custom stylesheet - for your changes-->
+    <link rel="stylesheet" href="/static/assets/css/style.violet.css">
+    <!-- Favicon-->
+    <link rel="shortcut icon" href="img/favicon.ico">
+    <!-- Tweaks for older IEs--><!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
+  </head>
+  <body>
+    <header class="header">   
+      <nav class="navbar navbar-expand-lg">
+        <div class="search-panel">
+          <div class="search-inner d-flex align-items-center justify-content-center">
+            <div class="close-btn">Close <i class="fa fa-close"></i></div>
+            <form id="searchForm" action="#">
+              <div class="form-group">
+                <input type="search" name="search" placeholder="What are you searching for...">
+                <button type="submit" class="submit">Search</button>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="container-fluid d-flex align-items-center justify-content-between">
+          <div class="navbar-header">
+            <!-- Navbar Header--><a href="{{ url_for('sellerpage') }}" class="navbar-brand">
+              <div class="brand-text brand-big visible text-uppercase"><strong class="text-primary">COS</strong><strong>MIC</strong></div>
+              <div class="brand-text brand-sm"><strong class="text-primary">C</strong><strong>M</strong></div></a>
+            <!-- Sidebar Toggle Btn-->
+            <button class="sidebar-toggle"><i class="fa fa-long-arrow-left"></i></button>
+          </div>
+          <div class="right-menu list-inline no-margin-bottom">    
+            <div class="list-inline-item"><a href="#" class="search-open nav-link"><i class="icon-magnifying-glass-browser"></i></a></div>
+            <div class="list-inline-item dropdown"><a id="navbarDropdownMenuLink1" href="http://example.com" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link messages-toggle"><i class="icon-email"></i><span class="badge dashbg-1">5</span></a>
+              <div aria-labelledby="navbarDropdownMenuLink1" class="dropdown-menu messages"><a href="#" class="dropdown-item message d-flex align-items-center">
+                  <div class="profile"><img src="img/avatar-3.jpg" alt="..." class="img-fluid">
+                    <div class="status online"></div>
+                  </div>
+                  <div class="content">   <strong class="d-block">Nadia Halsey</strong><span class="d-block">lorem ipsum dolor sit amit</span><small class="date d-block">9:30am</small></div></a><a href="#" class="dropdown-item message d-flex align-items-center">
+                  <div class="profile"><img src="img/avatar-2.jpg" alt="..." class="img-fluid">
+                    <div class="status away"></div>
+                  </div>
+                  <div class="content">   <strong class="d-block">Peter Ramsy</strong><span class="d-block">lorem ipsum dolor sit amit</span><small class="date d-block">7:40am</small></div></a><a href="#" class="dropdown-item message d-flex align-items-center">
+                  <div class="profile"><img src="img/avatar-1.jpg" alt="..." class="img-fluid">
+                    <div class="status busy"></div>
+                  </div>
+                  <div class="content">   <strong class="d-block">Sam Kaheil</strong><span class="d-block">lorem ipsum dolor sit amit</span><small class="date d-block">6:55am</small></div></a><a href="#" class="dropdown-item message d-flex align-items-center">
+                  <div class="profile"><img src="img/avatar-5.jpg" alt="..." class="img-fluid">
+                    <div class="status offline"></div>
+                  </div>
+                  <div class="content">   <strong class="d-block">Sara Wood</strong><span class="d-block">lorem ipsum dolor sit amit</span><small class="date d-block">10:30pm</small></div></a><a href="#" class="dropdown-item text-center message"> <strong>See All Messages <i class="fa fa-angle-right"></i></strong></a></div>
+            </div>
+            <!-- Tasks-->
+            <div class="list-inline-item dropdown"><a id="navbarDropdownMenuLink2" href="http://example.com" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link tasks-toggle"><i class="icon-new-file"></i><span class="badge dashbg-3">9</span></a>
+              <div aria-labelledby="navbarDropdownMenuLink2" class="dropdown-menu tasks-list"><a href="#" class="dropdown-item">
+                  <div class="text d-flex justify-content-between"><strong>Task 1</strong><span>40% complete</span></div>
+                  <div class="progress">
+                    <div role="progressbar" style="width: 40%" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" class="progress-bar dashbg-1"></div>
+                  </div></a><a href="#" class="dropdown-item">
+                  <div class="text d-flex justify-content-between"><strong>Task 2</strong><span>20% complete</span></div>
+                  <div class="progress">
+                    <div role="progressbar" style="width: 20%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" class="progress-bar dashbg-3"></div>
+                  </div></a><a href="#" class="dropdown-item">
+                  <div class="text d-flex justify-content-between"><strong>Task 3</strong><span>70% complete</span></div>
+                  <div class="progress">
+                    <div role="progressbar" style="width: 70%" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" class="progress-bar dashbg-2"></div>
+                  </div></a><a href="#" class="dropdown-item">
+                  <div class="text d-flex justify-content-between"><strong>Task 4</strong><span>30% complete</span></div>
+                  <div class="progress">
+                    <div role="progressbar" style="width: 30%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" class="progress-bar dashbg-4"></div>
+                  </div></a><a href="#" class="dropdown-item">
+                  <div class="text d-flex justify-content-between"><strong>Task 5</strong><span>65% complete</span></div>
+                  <div class="progress">
+                    <div role="progressbar" style="width: 65%" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100" class="progress-bar dashbg-1"></div>
+                  </div></a><a href="#" class="dropdown-item text-center"> <strong>See All Tasks <i class="fa fa-angle-right"></i></strong></a>
+              </div>
+            </div>
+            <!-- Tasks end-->
+            <!-- Log out               -->
+            <div class="list-inline-item logout">                   <a id="logout" href="{{ url_for('LOGOUT') }}" class="nav-link">Logout <i class="icon-logout"></i></a></div>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <div class="d-flex align-items-stretch">
+        <!-- Sidebar Navigation-->
+        <nav id="sidebar">
+          <!-- Sidebar Header-->
+          <div class="sidebar-header d-flex align-items-center">
+            <div class="avatar"><img src="/static/assets/images/logocosmic/logo.png" alt="..." class="img-fluid rounded-circle"></div>
+            <div class="title">
+                <h1 class="h6">{{ email }}</h1>
+              <p>SELLER</p>
+            </div>
+          </div>
+          <!-- Sidebar Navidation Menus--><span class="heading">Main</span>
+          <ul class="list-unstyled">
+                  <li class="active"><a href="/sellerpage"> <i class="icon-home"></i>Home </a></li>
+  
+                  <li><a href="#exampledropdownDropdown" aria-expanded="false" data-toggle="collapse"> <i class="icon-windows"></i>ORDERS</a>
+                    <ul id="exampledropdownDropdown" class="collapse list-unstyled ">
+                      <li><a href="{{ url_for('user_transaction') }}">my order</a></li>
+                      <li><a href="{{ url_for('seller_cancellation') }}">Cancellation Order</a></li>
+                      <li><a href="#">return and repund</a></li>
+                    </ul>
+                  </li>
+  
+                  <li><a href="#exampledropdownDropdown" aria-expanded="false" data-toggle="collapse"> <i class="icon-windows"></i>PRODUCTS</a>
+                    <ul id="exampledropdownDropdown" class="collapse list-unstyled ">
+                      <li><a href="{{ url_for('my_products') }}">My Product</a></li>
+                      <li><a href="/addpr">Add Product</a></li>
+                      <li hidden><a href="#">Suspendent Product</a></li>
+                    </ul>
+                  </li>
+                  
+  
+                  <li hidden><a href="tables.html"> <i class="icon-grid"></i>Tables </a></li>
+                  <li hidden><a href="charts.html"> <i class="fa fa-bar-chart"></i>Charts </a></li>
+                  <li hidden><a href="forms.html"> <i class="icon-padnote"></i>Forms </a></li>
+                  <li><a href="{{ url_for('seller_profile') }}"> <i class="icon-padnote"></i>ACCOUNT SETTING</a></li>
+                
+        </nav>
+      <!-- Sidebar Navigation end-->
+      <div class="page-content">
+        <!-- Page Header-->
+        <div class="page-header no-margin-bottom">
+          <div class="container-fluid">
+            <h2 class="h5 no-margin-bottom">PRODUCT</h2>
+          </div>
+        </div>
+        <!-- Breadcrumb-->
+        <div class="container-fluid">
+          <ul class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/sellerpage">Home</a></li>
+            <li class="breadcrumb-item active">My product</li>
+          </ul>
+        </div>
+        <section>
+          <div class="container">
+              <div class="row justify-content-center">
+          <div class="col-lg-10   ">
+              <div class="block">
+                  <div class="title">
+                      <strong class="d-block">Product Form</strong>
+                      <span class="d-block">Enter product details below.</span>
+                  </div>
+                  <div class="block-body">
+                      <form method="POST" action="/add_product" enctype="multipart/form-data" class="product-form">
+                          <div class="form-group">
+                              <label for="name">Product Name:</label>
+                              <input type="text" name="name" id="name" placeholder="Product Name" class="form-control" required>
+                          </div>
+          
+                          <div class="form-group">
+                              <label for="shop_name">Shop Name:</label>
+                              <input type="text" name="shop_name" value="{{ shop_details[6] }}" class="form-control">
+                          </div>
+          
+                          <div class="form-group">
+                              <label for="description">Product Description:</label>
+                              <textarea name="description" id="description" placeholder="Product Description" rows="4" class="form-control" required></textarea>
+                          </div>
+              
+                          <div class="form-group">
+                              <label for="price">Product Price:</label>
+                              <input type="text" name="price" id="price" placeholder="Product Price" class="form-control" required>
+                          </div>
+          
+                          <div class="form-group">
+                              <label for="stock">Stock:</label>
+                              <input type="text" name="stock" id="stock" placeholder="Stock" class="form-control" required>
+                          </div>
+              
+  
+                          <div class="form-group">
+                            <label for="location">Shipping Location:</label>
+                            <select class="form-control mb-3 mb-3" name="location" id="location" required>
+                                <option value="" disabled selected>Select Location</option>
+                                <!-- Luzon Locations -->
+                                <option value="NCR">NCR</option>
+                                <option value="Bulacan">Bulacan</option>
+                                <option value="Pampanga">Pampanga</option>
+                                <option value="Zambales">Zambales</option>
+                                <option value="Tarlac">Tarlac</option>
+                                <option value="Pangasinan">Pangasinan</option>
+                                <option value="La Union">La Union</option>
+                                <option value="Ilocos Norte">Ilocos Norte</option>
+                                <option value="Ilocos Sur">Ilocos Sur</option>
+                                <option value="Cagayan">Cagayan</option>
+                                <option value="Isabela">Isabela</option>
+                                <option value="Quirino">Quirino</option>
+                                <option value="Aurora">Aurora</option>
+                                <option value="Batanes">Batanes</option>
+                                <option value="Benguet">Benguet</option>
+                                <option value="Ifugao">Ifugao</option>
+                                <option value="Kalinga">Kalinga</option>
+                                <option value="Apayao">Apayao</option>
+                                <option value="Nueva Vizcaya">Nueva Vizcaya</option>
+                                <option value="Cavite">Cavite</option>
+                                <option value="Laguna">Laguna</option>
+                                <option value="Batangas">Batangas</option>
+                                <option value="Quezon">Quezon</option>
+                                <option value="Rizal">Rizal</option>
+                                <option value="Mindoro Occidental">Mindoro Occidental</option>
+                                <option value="Mindoro Oriental">Mindoro Oriental</option>
+                                <option value="Marinduque">Marinduque</option>
+                                <option value="Romblon">Romblon</option>
+                                <!-- Add more Luzon location options here -->
+                        
+                                <!-- Visayas Locations -->
+                                <option value="Cebu">Cebu</option>
+                                <!-- Add more Visayas location options here -->
+                        
+                                <!-- Mindanao Locations -->
+                                <option value="Davao del Sur">Davao del Sur</option>
+                                <option value="Davao del Norte">Davao del Norte</option>
+                                <option value="Zamboanga del Sur">Zamboanga del Sur</option>
+                                <option value="Misamis Oriental">Misamis Oriental</option>
+                                <option value="South Cotabato">South Cotabato</option>
+                                <!-- Add more Mindanao location options here -->
+                            </select>
+                        </div>
+
+                          <div class="form-group">
+                              <label for="variations">Variations:</label>
+                              <div id="variation-container">
+                                  <button class="btn btn-primary" type="button" onclick="addVariation()">Add Variation</button>
+                                  <input type="text" name="variations[]" placeholder="Enter Variation" class="form-control">
+                              </div>
+                          </div>
+                          
+          
+                          <div class="form-group">
+                              <label class="col-sm-3 form-control-label" for="category">Category:</label>
+                              <select class="form-control mb-3 mb-3" name="category" id="category" required>
+                                  <option  value="" disabled selected>Select Category</option>
+                                  <option value="Skin Care">Skin Care</option>
+                                  <option value="Make Up">Make Up</option>
+                                  <option value="Hair Care">Hair Care</option>
+                                  <option value="Fragrances">Fragrances</option>
+                                  <option value="Personal Care Appliances">Personal Care Appliances</option>
+                              </select>
+                          </div>
+          
+                          <div class="form-group">
+                              <label for="image">Product Image:</label>
+                              <input type="file" name="image" id="image" accept="image/*" required>
+                          </div>
+          
+          
+                          <h1>optional</h1>
+          
+          
+                          <div class="form-group">
+                                <div class="form-group">
+                                  <label for="enableDiscount">Enable Discount:</label>
+                                  <input class="checkbox-template" type="checkbox" id="enableDiscount" name="enableDiscount" onchange="toggleDiscountField()">
+                                  
+                              </div>
+                              <input class="form-control" type="text" name="discount" id="discount" placeholder="Discount" disabled>
+                          </div>
+
+                          <input type="submit" value="Add Product" class="btn btn-primary">
+                      </form>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+          
+          
+      </section>
+   
+   
+
+
+  <!-- JavaScript files-->
+  <script src="/static/assets/vendor/jquery/jquery.min.js"></script>
+  <script src="/static/assets/vendor/popper.js/umd/popper.min.js"> </script>
+  <script src="/static/assets/vendor/bootstrap/js/bootstrap.min.js"></script>
+  <script src="/static/assets/vendor/jquery.cookie/jquery.cookie.js"> </script>
+  <script src="/static/assets/vendor/chart.js/Chart.min.js"></script>
+  <script src="/static/assets/vendor/jquery-validation/jquery.validate.min.js"></script>
+  <script src="/static/assets/js/charts-home.js"></script>
+  <script src="/static/assets/js/front.js"></script>
+
+
+<script type="text/javascript">
+    $(document).ready(function(){
+    
+        $('.menu-line').click(function(){
+        $('.menu-container').toggleClass('active');
+        $('.menu-line').toggleClass('line');
+        $('.menu-line').toggleClass('opacity');
+        $('.shadow').toggleClass('shadow_opac');
+        })
+        
+    });
+   
+      
+</script>
+
+
+<script>
+    function addVariation() {
+        var container = document.getElementById("variation-container");
+        var input = document.createElement("input");
+        input.type = "text";
+        input.name = "variations[]";
+        input.placeholder = "Enter Variation";
+        container.appendChild(input);
+    }
+</script>
+
+
+<script>
+    function toggleDiscountField() {
+        var enableDiscountCheckbox = document.getElementById("enableDiscount");
+        var discountField = document.getElementById("discount");
+    
+        if (enableDiscountCheckbox.checked) {
+            discountField.disabled = false;
+        } else {
+            discountField.disabled = true;
+            discountField.value = ""; // Clear the value when disabling the field
+        }
+    }
+    </script
+</body>
+</html>

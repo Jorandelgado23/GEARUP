@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+
+<!-- belle/login.html   11 Nov 2019 12:22:27 GMT -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<title>LOGIN TO GEAR UP!</title>
+<meta name="description" content="description">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Favicon -->
+<link rel="shortcut icon" href="/static/assets/images/sport/favicongearup.png" />
+ <!-- Bootstrap CSS-->
+ <link rel="stylesheet" href="/static/assets/vendor/bootstrap/css/bootstrap.min.css">
+ <!-- Font Awesome CSS-->
+ <link rel="stylesheet" href="/static/assets/vendor/font-awesome/css/font-awesome.min.css">
+ <!-- Custom Font Icons CSS-->
+ <link rel="stylesheet" href="/static/assets/css/font.css">
+ <!-- Google fonts - Muli-->
+ <link rel="stylesheet" href="/static/assets/https://fonts.googleapis.com/css?family=Muli:300,400,700">
+ <!-- theme stylesheet-->
+ <link rel="stylesheet" href="/static/assets/css/style.pink.css" id="theme-stylesheet">
+ <!-- Custom stylesheet - for your changes-->
+ <link rel="stylesheet" href="/static/assets/css/custom.css">
+ <link href="https://fonts.googleapis.com/css2?family=Lato:wght@100&display=swap" rel="stylesheet">
+
+<style>
+  .login-page {
+    background-image: url('/static/assets/images/sport/slide4.jpg'); /* Replace 'path/to/your/image.jpg' with the actual path to your image */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100vh; /* Set the height as needed */
+}
+
+.form-holder {
+    width: 100%;
+}
+
+.info {
+    padding: 30px;
+}
+
+.logo h1 {
+    color: #fff; /* Change the color as needed */
+}
+
+
+.form {
+    padding: 30px;
+}
+
+.input-material {
+    width: 100%;
+}
+
+.btn-primary {
+    margin-top: 15px;
+}
+
+.forgot-pass, .signup {
+    color: #333; /* Change the color as needed */
+    text-decoration: none;
+    margin-top: 10px;
+    display: inline-block;
+}
+.flash-message {
+  background: rgb(2,0,36);
+  background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(121,9,86,0.8350937787224264) 60%, rgba(151,52,142,1) 100%);
+  color: white;
+  font-size: larger;
+}
+p {
+  font-family: 'Lato', sans-serif;
+  font-weight: 300;  /* Lato Thin */
+}
+
+
+</style>
+</head>
+<body>
+<div class="login-page">
+  <div class="container d-flex align-items-center">
+      <div class="form-holder has-shadow">
+          <div class="row">
+            
+              <!-- Logo & Information Panel-->
+              <div class="col-lg-6">
+                  <div class="info d-flex align-items-center">
+                      <div class="content">
+                          <div class="logo">
+                            <h1 style="font-family: 'Times New Roman', Times, serif; font-size: 38px;">WELCOME TO GEAR UP!</h1>
+
+
+                          </div>
+                          <p> "Step into a world of energy and excitement! Welcome to our dynamic haven of all things sports. Discover the thrill of our gear as you embark on a journey to boost your performance. Push yourself, because here, possibilities are endless. Welcome to the ultimate sports adventure!"</p>
+                      </div>
+                  </div>
+              </div>
+              <!-- Form Panel    -->
+              <div class="col-lg-6">
+                  <div class="form d-flex align-items-center">
+                      <div class="content">
+                        <div class="flash-popup" id="flash-popup">
+                          {% with messages = get_flashed_messages() %}
+                            {% if messages %}
+                              <div class="flash-messages">
+                                {% for message in messages %}
+                                  <div class="flash-message" role="alert">
+                                    {{ message }}
+                                  </div>
+                                {% endfor %}
+                              </div>
+                            {% endif %}
+                          {% endwith %}
+                        </div>
+            
+                        <script>
+                          // Function to close the flash popup
+                          function closeFlashPopup() {
+                            var flashPopup = document.getElementById('flash-popup');
+                            if (flashPopup) {
+                              flashPopup.style.display = 'none';
+                            }
+                          }
+                        
+                          // Call the function after a certain time
+                          setTimeout(closeFlashPopup, 3000); // Adjust the delay time as needed
+                        </script>
+                          <form method="post" action="/login" id="LoginForm" accept-charset="UTF-8" class="form-validate">
+                              <div class="form-group">
+                                  <label for="login-username" class="label-material">Email</label>
+                                  <input id="login-username" type="email" name="email" class="input-material" placeholder="Enter your email" autocorrect="on" autocapitalize="off" autofocus required>
+                              </div>
+                              <div class="form-group">
+                                  <label for="login-password" class="label-material">Password</label>
+                                  <input id="login-password" type="password" name="password" class="input-material" placeholder="Enter your password" required>
+                              </div>
+                              <button type="submit" class="btn btn-primary">Sign In</button>
+                              <a href="{{ url_for('forgot_password') }}" class="forgot-pass">Forgot your password?</a><br>
+                              <small>Do not have an account? </small><a href="{{ url_for('register') }}" class="signup">Create an account</a>
+                          </form>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+      
+      
+        
+    </div>
+    <!--End Body Content-->
+    
+    <!--Scoll Top-->
+    <span id="site-scroll"><i class="icon anm anm-angle-up-r"></i></span>
+    <!--End Scoll Top-->
+    
+     <!-- Including Jquery -->
+     <script src="/static/assets/js/vendor/jquery-3.3.1.min.js"></script>
+     <script src="/static/assets/js/vendor/jquery.cookie.js"></script>
+     <script src="/static/assets/js/vendor/modernizr-3.6.0.min.js"></script>
+     <script src="/static/assets/js/vendor/wow.min.js"></script>
+     <!-- Including Javascript -->
+     <script src="/static/assets/js/bootstrap.min.js"></script>
+     <script src="/static/assets/js/plugins.js"></script>
+     <script src="/static/assets/js/popper.min.js"></script>
+     <script src="/static/assets/js/lazysizes.js"></script>
+     <script src="/static/assets/js/main.js"></script>
+
+
+
+</div>
+
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    var emailInput = document.getElementById("login-username");
+ 
+  
+    var storedEmail = localStorage.getItem("storedEmail");
+  
+    if (storedEmail) {
+      emailInput.value = storedEmail;
+    }
+      // I-clear ang localStorage kung mag-reload ang page
+      localStorage.clear();
+
+  });
+  
+  function saveToLocalStorage() {
+    var emailValue = document.getElementById("login-username").value;
+  
+    localStorage.setItem("storedEmail", emailValue);
+  }
+  
+  document.getElementById("LoginForm").addEventListener("submit", saveToLocalStorage);
+  </script>
+
+</body>
+
+<!-- belle/login.html   11 Nov 2019 12:22:27 GMT -->
+</html>

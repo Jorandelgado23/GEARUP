@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delete User</title>
+</head>
+<body>
+    <h1>Delete User</h1>
+    <p>Are you sure you want to delete the user: {{ user[1] }} {{ user[2] }}?</p>
+    <form method="POST" action="/delete_user/{{ user[0] }}">
+        <table>
+            <tr>
+                <td><button type="submit">Yes, Delete User</button></td>
+                <td><button onclick="window.location.href='/view_users'">Cancel</button></td>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>

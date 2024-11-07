@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+
+<!-- belle/register.html   11 Nov 2019 12:22:27 GMT -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<title>Create an Account</title>
+<meta name="description" content="description">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Favicon -->
+<link rel="shortcut icon" href="/static/assets/images/sport/favicongearup.png" />
+ <!-- Bootstrap CSS-->
+ <link rel="stylesheet" href="/static/assets/vendor/bootstrap/css/bootstrap.min.css">
+ <!-- Font Awesome CSS-->
+ <link rel="stylesheet" href="/static/assets/vendor/font-awesome/css/font-awesome.min.css">
+ <!-- Custom Font Icons CSS-->
+ <link rel="stylesheet" href="/static/assets/css/font.css">
+ <!-- Google fonts - Muli-->
+ <link rel="stylesheet" href="/static/assets/https://fonts.googleapis.com/css?family=Muli:300,400,700">
+ <!-- theme stylesheet-->
+ <link rel="stylesheet" href="/static/assets/css/style.pink.css" id="theme-stylesheet">
+ <!-- Custom stylesheet - for your changes-->
+ <link rel="stylesheet" href="/static/assets/css/custom.css">
+ <link href="https://fonts.googleapis.com/css2?family=Lato:wght@100&display=swap" rel="stylesheet">
+
+<style>
+  .login-page {
+    background-image: url('/static/assets/images/sport/slide4.jpg'); /* Replace 'path/to/your/image.jpg' with the actual path to your image */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 220vh; /* Set the height as needed */
+}
+
+.form-holder {
+    width: 100%;
+}
+
+.info {
+    padding: 30px;
+}
+
+.logo h1 {
+    color: #fff; /* Change the color as needed */
+}
+
+
+.form {
+    padding: 30px;
+}
+
+.input-material {
+    width: 100%;
+}
+
+.btn-primary {
+    margin-top: 15px;
+}
+
+.forgot-pass, .signup {
+    color: #333; /* Change the color as needed */
+    text-decoration: none;
+    margin-top: 10px;
+    display: inline-block;
+}
+
+/* Using word-wrap: normal; */
+.normal-wrap {
+
+  word-wrap: break-word;
+}
+.flash-message {
+  background: rgb(2,0,36);
+  background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(121,9,86,0.8350937787224264) 60%, rgba(151,52,142,1) 100%);
+  color: white;
+  font-size: larger;
+}
+
+p {
+  font-family: 'Lato', sans-serif;
+  font-weight: 300;  /* Lato Thin */
+}
+</style>
+</head>
+<body>
+  <div class="login-page">
+    <div class="container d-flex align-items-center">
+        <div class="form-holder has-shadow">
+            <div class="row">
+                <!-- Logo & Information Panel-->
+                <div class="col-lg-6">
+                    <div class="info d-flex align-items-center">
+                        <div class="content">
+                            <div class="logo">
+                                <h1 style="font-family: 'Times New Roman', Times, serif; font-size: 38px;">WELCOME TO GEAR UP!</h1>
+                            </div>
+                            <p>"Step into a world of strength and adventure! Welcome to our ultimate haven for all things sporty. Discover the power of our gear as you embark on a journey to elevate your performance. Equip yourself, because here, limits are just challenges to overcome. Welcome to the ultimate sports gear destination!"</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Form Panel -->
+                <div class="col-lg-6">
+                    <div class="form d-flex align-items-center">
+                        <div class="content">
+                          <div class="flash-popup" id="flash-popup">
+                            {% with messages = get_flashed_messages() %}
+                              {% if messages %}
+                                <div class="flash-messages">
+                                  {% for message in messages %}
+                                    <div class="flash-message" role="alert">
+                                      {{ message }}
+                                    </div>
+                                  {% endfor %}
+                                </div>
+                              {% endif %}
+                            {% endwith %}
+                          </div>
+              
+                          <script>
+                            // Function to close the flash popup
+                            function closeFlashPopup() {
+                              var flashPopup = document.getElementById('flash-popup');
+                              if (flashPopup) {
+                                flashPopup.style.display = 'none';
+                              }
+                            }
+                          
+                            // Call the function after a certain time
+                            setTimeout(closeFlashPopup, 3000); // Adjust the delay time as needed
+                          </script>
+                          <form method="post" action="#" id="registrationForm" accept-charset="UTF-8" class="text-left form-validate">
+                            <div class="form-group-material">
+                                <label for="Username" class="label-material">Username</label>
+                                <input type="text" name="username" placeholder="Enter your username" id="Username" required class="input-material">
+                            </div>
+                            
+                            <div class="form-group-material">
+                                <label for="FirstName" class="label-material">First Name</label>
+                                <input type="text" name="first_name" id="FirstName" placeholder="Enter your first name" required class="input-material">
+                            </div>
+                            
+                            <div class="form-group-material">
+                                <label for="LastName" class="label-material">Last Name</label>
+                                <input type="text" name="last_name" id="LastName" placeholder="Enter your last name" required class="input-material">
+                            </div>
+                            
+                            <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                                <div class="form-group">
+                                    <label for="Email" class="label-material">Email</label>
+                                    <input type="email" name="email" placeholder="Enter your email" id="Email" autocorrect="on" autocapitalize="off" autofocus required class="input-material">
+                                </div>
+                            </div>
+                            
+                            <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                                <div class="form-group">
+                                    <label for="Password" class="label-material">Password</label>
+                                    <input type="password" name="password" placeholder="Enter your password" id="Password" required class="input-material">
+                                </div>
+                            </div>
+                            
+                            <div class="form-group-material">
+                                <label for="Birthday" class="label-material">Birthday</label>
+                                <input type="date" name="birthday" id="Birthday" required class="input-material">
+                            </div>
+                            
+                            <div class="form-group-material">
+                                <label for="Location" class="label-material">Location</label>
+                                <input type="text" name="location" id="Location" placeholder="Enter your location" required class="input-material">
+                            </div>
+                            
+                            <div class="form-group-material">
+                                <label for="PhoneNumber" class="label-material">Phone Number</label>
+                                <input type="text" name="phone_number" id="PhoneNumber" placeholder="Enter your phone number" required class="input-material" maxlength="11">
+                            </div>
+                            
+                            <div class="form-group col-12">
+                                <div class="form-check">
+                                    <input type="checkbox" class="form-check-input" id="agreeTerms">
+                                    <label class="form-check-label" for="agreeTerms">I agree to the <a href="#" data-toggle="modal" data-target="#termsModal">Terms and Conditions</a></label>
+                                </div>
+                            </div>
+                        
+                            <div class="form-group text-center">
+                                <button type="submit" id="register" class="btn btn-primary">Register</button>
+                            </div>
+                        </form>
+                        
+                            <small>Already have an account? </small><a href="{{ url_for('login') }}" class="signup">Login</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Terms and Conditions Modal -->
+<div class="modal fade" id="termsModal" tabindex="-1" role="dialog" aria-labelledby="termsModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="termsModalLabel">Terms and Conditions</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+              </button>
+          </div>
+          <div class="modal-body">
+            <div class="normal-wrap">
+              <h6 class="font-weight-bold">Terms and Conditions for GEAR UP! Login</h6>
+              <p>1. <strong>Acceptance of Terms</strong><br>
+              By accessing or using the login services provided by GEAR UP!, you agree to be bound by these terms and conditions. If you do not agree with any part of these terms, you may not use our login services.</p>
+
+              <p>2. <strong>User Accounts</strong><br>
+              a. You must be 18 years or older to create an account.<br>
+              b. You are responsible for maintaining the confidentiality of your account information and password.<br>
+              c. You agree to notify us immediately of any unauthorized use of your account.</p>
+
+              <p>3. <strong>Personal Information</strong><br>
+              a. We collect and use personal information in accordance with our Privacy Policy.<br>
+              b. You consent to the collection, use, and disclosure of your personal information as outlined in our Privacy Policy.</p>
+
+              <p>4. <strong>Use of the Login Services</strong><br>
+              a. You agree to use the login services for lawful purposes only.<br>
+              b. You may not use the login services to engage in any activity that violates local, state, national, or international laws.</p>
+
+              <p>5. <strong>Prohibited Activities</strong><br>
+              a. You may not attempt to gain unauthorized access to our systems or networks.<br>
+              b. You may not use the login services to transmit any harmful or malicious code.<br>
+              c. You may not use the login services to engage in any form of harassment, abuse, or discrimination.</p>
+
+              <p>6. <strong>Intellectual Property</strong><br>
+              a. All content and materials available through the login services are the property of GEAR UP! and are protected by intellectual property laws.</p>
+
+              <p>7. <strong>Termination of Account</strong><br>
+              a. GEAR UP! reserves the right to terminate or suspend your account at any time, without notice, for any reason.</p>
+
+              <p>8. <strong>Changes to Terms</strong><br>
+              a. GEAR UP! reserves the right to update or change these terms and conditions at any time without prior notice.</p>
+
+              <p>9. <strong>Governing Law</strong><br>
+              a. These terms and conditions are governed by and construed in accordance with the laws of [Your Jurisdiction].</p>
+
+              <p>10. <strong>Contact Information</strong><br>
+              a. For questions about these terms and conditions, you can contact us at [Your Contact Information].</p>
+
+              <p class="text-muted">By using our login services, you acknowledge that you have read, understood, and agree to these terms and conditions.</p>
+          </div>
+      </div>
+            
+            
+            
+            
+            
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+      </div>
+  </div>
+</div>
+
+
+    
+    <!--Scoll Top-->
+    <span id="site-scroll"><i class="icon anm anm-angle-up-r"></i></span>
+    <!--End Scoll Top-->
+    
+     <!-- Including Jquery -->
+     <script src="/static/assets/js/vendor/jquery-3.3.1.min.js"></script>
+     <script src="/static/assets/js/vendor/jquery.cookie.js"></script>
+     <script src="/static/assets/js/vendor/modernizr-3.6.0.min.js"></script>
+     <script src="/static/assets/js/vendor/wow.min.js"></script>
+     <!-- Including Javascript -->
+     <script src="/static/assets/js/bootstrap.min.js"></script>
+     <script src="/static/assets/js/plugins.js"></script>
+     <script src="/static/assets/js/popper.min.js"></script>
+     <script src="/static/assets/js/lazysizes.js"></script>
+     <script src="/static/assets/js/main.js"></script>
+</div>
+
+
+<script>
+  function toggleSellerForm() {
+      var sellerFields = document.getElementById("sellerFields");
+      var roleBuyer = document.getElementById("role-buyer");
+      var roleSeller = document.getElementById("role-seller");
+
+      if (roleSeller.checked) {
+          sellerFields.style.display = "block";
+      } else {
+          sellerFields.style.display = "none";
+      }
+
+      if (roleBuyer.checked) {
+          sellerFields.style.display = "none";
+      }
+  }
+</script>
+
+
+
+
+
+<script>
+  // Enable/disable the "Create" button based on the checkbox state
+  document.getElementById('agreeTerms').addEventListener('change', function () {
+      document.getElementById('createBtn').disabled = !this.checked;
+  });
+</script>
+
+
+<script>
+
+</script>
+
+
+
+<script>
+   // Pag-load ng document
+   document.addEventListener("DOMContentLoaded", function() {
+    // Kunin ang mga element ng input
+    var usernameInput = document.getElementById("Username");
+    var firstNameInput = document.getElementById("FirstName");
+    var lastNameInput = document.getElementById("LastName");
+    var birthdayInput = document.getElementById("Birthday");
+    var locationInput = document.getElementById("Location");
+    var phoneNumberInput = document.getElementById("PhoneNumber");
+
+    // Kunin ang nilagay na value sa localStorage (kung meron)
+    var storedUsername = localStorage.getItem("storedUsername");
+    var storedFirstName = localStorage.getItem("storedFirstName");
+    var storedLastName = localStorage.getItem("storedLastName");
+    var storedBirthday = localStorage.getItem("storedBirthday");
+    var storedLocation = localStorage.getItem("storedLocation");
+    var storedPhoneNumber = localStorage.getItem("storedPhoneNumber");
+
+    // Ilagay ang stored value sa mga input field
+    if (storedUsername) {
+      usernameInput.value = storedUsername;
+    }
+
+    if (storedFirstName) {
+      firstNameInput.value = storedFirstName;
+    }
+
+    if (storedLastName) {
+      lastNameInput.value = storedLastName;
+    }
+
+
+    if (storedBirthday) {
+      birthdayInput.value = storedBirthday;
+    }
+
+    if (storedLocation) {
+      locationInput.value = storedLocation;
+    }
+
+    if (storedPhoneNumber) {
+      phoneNumberInput.value = storedPhoneNumber;
+    }
+    // I-clear ang localStorage kung mag-reload ang page
+    localStorage.clear();
+  });
+
+  // Function na tatawagin pag-submit ng form
+  function saveToLocalStorage() {
+    // Kunin ang mga input values
+    var usernameValue = document.getElementById("Username").value;
+    var firstNameValue = document.getElementById("FirstName").value;
+    var lastNameValue = document.getElementById("LastName").value;
+    var birthdayValue = document.getElementById("Birthday").value;
+    var locationValue = document.getElementById("Location").value;
+    var phoneNumberValue = document.getElementById("PhoneNumber").value;
+
+    // Ilagay ang mga values sa localStorage
+    localStorage.setItem("storedUsername", usernameValue);
+    localStorage.setItem("storedFirstName", firstNameValue);
+    localStorage.setItem("storedLastName", lastNameValue);
+    localStorage.setItem("storedBirthday", birthdayValue);
+    localStorage.setItem("storedLocation", locationValue);
+    localStorage.setItem("storedPhoneNumber", phoneNumberValue);
+  }
+
+  // Attach ang function sa form submit event
+  document.getElementById("registrationForm").addEventListener("submit", saveToLocalStorage);
+</script>
+</body>
+
+<!-- belle/register.html   11 Nov 2019 12:22:27 GMT -->
+</html>

@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>Document</title>
+    <style>
+      .bg-pink {
+        background-color: #5c2c8b;
+    }
+    .bg-light-violet {
+        background-color: #5c2c8b; /* Use your desired color code */
+    }
+    </style>
+</head>
+<body>
+
+    <div class="container-fluid">
+        <div class="row flex-nowrap">
+            <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-light-violet">
+                <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
+                    <a href="/" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+                        <span class="fs-5 d-none d-sm-inline">Seller Account</span>
+                    </a>
+                    <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
+                        <li class="nav-item">
+                            
+                        </li>
+                        <li>
+                            <a href="#submenu1" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
+                                <i class="fs-4 bi-speedometer2"></i> <span class="ms-1 d-none d-sm-inline text-white">Dashboard</span> </a>
+                        </li>
+                        <li>
+                            <a href="#submenu2" data-bs-toggle="collapse"  class="nav-link px-0 align-middle">
+                                <i class="fs-4 bi-table"></i> <span class="ms-1 d-none d-sm-inline text-white">Orders</span></a>
+                                <ul class="collapse nav flex-column ms-1" id="submenu2" data-bs-parent="#menu">
+                                    <li class="w-100">
+                                        <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline text-white">My order</span></a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline text-white">Cancellation</span></a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline text-white">Return and refund</span></a>
+                                    </li>
+                                </ul>
+                        </li>
+                        <li>
+                            <a href="#submenu3" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
+                                <i class="fs-4 bi-grid"></i> <span class="ms-1 d-none d-sm-inline text-white">Products</span> </a>
+                                <ul class="collapse nav flex-column ms-1" id="submenu3" data-bs-parent="#menu">
+                                <li class="w-100">
+                                    <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline text-white">My Product</span></a>
+                                </li>
+                                <li>
+                                    <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline text-white">Add new product</span></a>
+                                </li>
+                                <li>
+                                    <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline text-white">Suspended product</span></a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#submenu4" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
+                                <i class="fs-4 bi-grid"></i> <span class="ms-1 d-none d-sm-inline text-white">Shipment</span> </a>
+                                <ul class="collapse nav flex-column ms-1" id="submenu4" data-bs-parent="#menu">
+                                <li class="w-100">
+                                    <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline text-white">Mass Ship</span></a>
+                                </li>
+                                <li>
+                                    <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline text-white">Shipping setting</span></a>
+                                </li>
+                    </ul>
+                </li>
+                    <hr>
+                    <div class="dropdown pb-4">
+                        <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+                            <img src="/static/assets/images/logocosmic/beauty_product.jpg" alt="hugenerd" width="30" height="30" class="rounded-circle">
+                            <span class="d-none d-sm-inline mx-1">Cosmic</span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
+                            <li><a class="dropdown-item" href="#">Settings</a></li>
+                            <li><a class="dropdown-item" href="#">Profile</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="#">Sign out</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+    <!-- Content wrapper -->
+    <div class="content-wrapper">
+        <!-- Content -->
+
+        <div class="container-xxl flex-grow-1 container-p-y">
+          <h4 class="py-3 mb-4"><span class="text-muted fw-light">Account Settings / </span> Connections</h4>
+
+          <div class="row">
+            <div class="col-md-12">
+              <ul class="nav nav-pills flex-column flex-md-row mb-3">
+                <li class="nav-item">
+                  <a class="nav-link" href="pages-account-settings-account.html"
+                    ><i class="bx bx-user me-1"></i> Account</a
+                  >
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link active" href="javascript:void(0);"
+                    ><i class="bx bx-link-alt me-1"></i> Connections</a
+                  >
+                </li>
+              </ul>
+              <div class="row">
+                <div class="col-md-6 col-12 mb-md-0 mb-4">
+                  <div class="card">
+                    <h5 class="card-header">Connected Accounts</h5>
+                    <div class="card-body">
+                      <p>Display content from your connected accounts on your site</p>
+                      <!-- Connections -->
+                      <div class="d-flex mb-3">
+                        <div class="flex-shrink-0">
+                          <img src="../assets/img/icons/brands/google.png" alt="google" class="me-3" height="30" />
+                        </div>
+                        <div class="flex-grow-1 row">
+                          <div class="col-9 mb-sm-0 mb-2">
+                            <h6 class="mb-0">Google</h6>
+                            <small class="text-muted">Calendar and contacts</small>
+                          </div>
+                          <div class="col-3 text-end">
+                            <div class="form-check form-switch">
+                              <input class="form-check-input float-end" type="checkbox" role="switch" />
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="d-flex mb-3">
+                        <div class="flex-shrink-0">
+                          <img src="../assets/img/icons/brands/slack.png" alt="slack" class="me-3" height="30" />
+                        </div>
+                        <div class="flex-grow-1 row">
+                          <div class="col-9 mb-sm-0 mb-2">
+                            <h6 class="mb-0">Slack</h6>
+                            <small class="text-muted">Communication</small>
+                          </div>
+                          <div class="col-3 text-end">
+                            <div class="form-check form-switch">
+                              <input class="form-check-input float-end" type="checkbox" role="switch" checked />
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="d-flex mb-3">
+                        <div class="flex-shrink-0">
+                          <img src="../assets/img/icons/brands/github.png" alt="github" class="me-3" height="30" />
+                        </div>
+                        <div class="flex-grow-1 row">
+                          <div class="col-9 mb-sm-0 mb-2">
+                            <h6 class="mb-0">Github</h6>
+                            <small class="text-muted">Manage your Git repositories</small>
+                          </div>
+                          <div class="col-3 text-end">
+                            <div class="form-check form-switch">
+                              <input class="form-check-input float-end" type="checkbox" role="switch" />
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="d-flex mb-3">
+                        <div class="flex-shrink-0">
+                          <img
+                            src="../assets/img/icons/brands/mailchimp.png"
+                            alt="mailchimp"
+                            class="me-3"
+                            height="30" />
+                        </div>
+                        <div class="flex-grow-1 row">
+                          <div class="col-9 mb-sm-0 mb-2">
+                            <h6 class="mb-0">Mailchimp</h6>
+                            <small class="text-muted">Email marketing service</small>
+                          </div>
+                          <div class="col-3 text-end">
+                            <div class="form-check form-switch">
+                              <input class="form-check-input float-end" type="checkbox" role="switch" checked />
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="d-flex">
+                        <div class="flex-shrink-0">
+                          <img src="../assets/img/icons/brands/asana.png" alt="asana" class="me-3" height="30" />
+                        </div>
+                        <div class="flex-grow-1 row">
+                          <div class="col-9 mb-sm-0 mb-2">
+                            <h6 class="mb-0">Asana</h6>
+                            <small class="text-muted">Communication</small>
+                          </div>
+                          <div class="col-3 text-end">
+                            <div class="form-check form-switch">
+                              <input class="form-check-input float-end" type="checkbox" role="switch" checked />
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- /Connections -->
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6 col-12">
+                  <div class="card">
+                    <h5 class="card-header">Social Accounts</h5>
+                    <div class="card-body">
+                      <p>Display content from social accounts on your site</p>
+                      <!-- Social Accounts -->
+                      <div class="d-flex mb-3">
+                        <div class="flex-shrink-0">
+                          <img
+                            src="../assets/img/icons/brands/facebook.png"
+                            alt="facebook"
+                            class="me-3"
+                            height="30" />
+                        </div>
+                        <div class="flex-grow-1 row">
+                          <div class="col-8 col-sm-7 mb-sm-0 mb-2">
+                            <h6 class="mb-0">Facebook</h6>
+                            <small class="text-muted">Not Connected</small>
+                          </div>
+                          <div class="col-4 col-sm-5 text-end">
+                            <button type="button" class="btn btn-icon btn-outline-secondary">
+                              <i class="bx bx-link-alt"></i>
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="d-flex mb-3">
+                        <div class="flex-shrink-0">
+                          <img
+                            src="../assets/img/icons/brands/twitter.png"
+                            alt="twitter"
+                            class="me-3"
+                            height="30" />
+                        </div>
+                        <div class="flex-grow-1 row">
+                          <div class="col-8 col-sm-7 mb-sm-0 mb-2">
+                            <h6 class="mb-0">Twitter</h6>
+                            <a href="https://twitter.com/Theme_Selection" target="_blank">@ThemeSelection</a>
+                          </div>
+                          <div class="col-4 col-sm-5 text-end">
+                            <button type="button" class="btn btn-icon btn-outline-danger">
+                              <i class="bx bx-trash-alt"></i>
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="d-flex mb-3">
+                        <div class="flex-shrink-0">
+                          <img
+                            src="../assets/img/icons/brands/instagram.png"
+                            alt="instagram"
+                            class="me-3"
+                            height="30" />
+                        </div>
+                        <div class="flex-grow-1 row">
+                          <div class="col-8 col-sm-7 mb-sm-0 mb-2">
+                            <h6 class="mb-0">instagram</h6>
+                            <a href="https://www.instagram.com/themeselection/" target="_blank">@ThemeSelection</a>
+                          </div>
+                          <div class="col-4 col-sm-5 text-end">
+                            <button type="button" class="btn btn-icon btn-outline-danger">
+                              <i class="bx bx-trash-alt"></i>
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="d-flex mb-3">
+                        <div class="flex-shrink-0">
+                          <img
+                            src="../assets/img/icons/brands/dribbble.png"
+                            alt="dribbble"
+                            class="me-3"
+                            height="30" />
+                        </div>
+                        <div class="flex-grow-1 row">
+                          <div class="col-8 col-sm-7 mb-sm-0 mb-2">
+                            <h6 class="mb-0">Dribbble</h6>
+                            <small class="text-muted">Not Connected</small>
+                          </div>
+                          <div class="col-4 col-sm-5 text-end">
+                            <button type="button" class="btn btn-icon btn-outline-secondary">
+                              <i class="bx bx-link-alt"></i>
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="d-flex">
+                        <div class="flex-shrink-0">
+                          <img
+                            src="../assets/img/icons/brands/behance.png"
+                            alt="behance"
+                            class="me-3"
+                            height="30" />
+                        </div>
+                        <div class="flex-grow-1 row">
+                          <div class="col-8 col-sm-7 mb-sm-0 mb-2">
+                            <h6 class="mb-0">Behance</h6>
+                            <small class="text-muted">Not Connected</small>
+                          </div>
+                          <div class="col-4 col-sm-5 text-end">
+                            <button type="button" class="btn btn-icon btn-outline-secondary">
+                              <i class="bx bx-link-alt"></i>
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- /Social Accounts -->
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- / Content -->
+
+        <!-- Footer -->
+        <footer class="content-footer footer bg-footer-theme">
+          <div class="container-xxl d-flex flex-wrap justify-content-between py-2 flex-md-row flex-column">
+            <div class="mb-2 mb-md-0">
+              ©
+              <script>
+                document.write(new Date().getFullYear());
+              </script>
+              , made with ❤️ by
+              <a href="https://themeselection.com" target="_blank" class="footer-link fw-medium">ThemeSelection</a>
+            </div>
+            <div class="d-none d-lg-inline-block">
+              <a href="https://themeselection.com/license/" class="footer-link me-4" target="_blank">License</a>
+              <a href="https://themeselection.com/" target="_blank" class="footer-link me-4">More Themes</a>
+
+              <a
+                href="https://demos.themeselection.com/sneat-bootstrap-html-admin-template/documentation/"
+                target="_blank"
+                class="footer-link me-4"
+                >Documentation</a
+              >
+
+              <a
+                href="https://github.com/themeselection/sneat-html-admin-template-free/issues"
+                target="_blank"
+                class="footer-link"
+                >Support</a
+              >
+            </div>
+          </div>
+        </footer>
+        <!-- / Footer -->
+
+        <div class="content-backdrop fade"></div>
+      </div>
+      <!-- Content wrapper -->
+    </div>
+    <!-- / Layout page -->
+  </div>
+
+  <!-- Overlay -->
+  <div class="layout-overlay layout-menu-toggle"></div>
+</div>
+<!-- / Layout wrapper -->
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

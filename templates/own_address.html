@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+            integrity="sha512-1qcd0MDiccMmJ3fr4z2APtCwSov+g8qE7a1IaQz5yblLEZNLNT5WLC/Bp9QpLbkL1Ix9MTEUwHkjhFVplYAfaA=="
+            crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.4/dist/sweetalert2.min.css">
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/static/assets/images/logocosmic/logo.png" />
+    <!-- Plugins CSS -->
+    <link rel="stylesheet" href="/static/assets/css/plugins.css">
+    <!-- Bootstap CSS -->
+    <link rel="stylesheet" href="/static/assets/css/bootstrap.min.css">
+    <!-- Main Style CSS -->
+    <link rel="stylesheet" href="/static/assets/css/style.css">
+    <link rel="stylesheet" href="/static/assets/css/responsive.css">
+    <title>Address Book</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        #addressContainer {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .addressCard {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 10px;
+            width: calc(33.33% - 20px);
+            box-sizing: border-box;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 200px; /* Set a fixed height for better alignment */
+        }
+
+        .addressCard button {
+            padding: 10px;
+            cursor: pointer;
+        }
+
+        #addAddressForm {
+            /* Change display: none to display: block */
+            display: block;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Address Book</h2>
+
+<button onclick="toggleForm()">Add Address</button>
+
+<div id="addAddressForm">
+    <h3>Add/Edit Address</h3>
+    <form id="addressForm">
+        <label for="fullName">Full Name:</label>
+        <input type="text" id="fullName" required>
+
+        <label for="phoneNumber">Phone Number:</label>
+        <input type="tel" id="phoneNumber" required>
+
+        <label for="region">Region:</label>
+        <input type="text" id="region" required>
+
+        <label for="province">Province:</label>
+        <input type="text" id="province" required>
+
+        <label for="city">City:</label>
+        <input type="text" id="city" required>
+
+        <label for="barangay">Barangay:</label>
+        <input type="text" id="barangay" required>
+
+        <label for="postalCode">Postal Code:</label>
+        <input type="text" id="postalCode" required>
+
+        <label for="streetName">Street Name:</label>
+        <input type="text" id="streetName" required>
+
+        <label for="building">Building:</label>
+        <input type="text" id="building" required>
+
+        <label for="houseNo">House No.:</label>
+        <input type="text" id="houseNo" required>
+
+        <button type="button" onclick="saveAddress()">Save</button>
+        <button type="button" onclick="cancelForm()">Cancel</button>
+    </form>
+</div>
+
+<div id="addressContainer">
+    <!-- Address entries will be added here dynamically -->
+</div>
+
+<script>
+    let addresses = [];
+    let editIndex = -1; // Indicates whether in edit mode and the index being edited
+
+    function toggleForm() {
+        document.getElementById('addAddressForm').style.display = 'block';
+        // Clear form fields
+        clearFormFields();
+    }
+
+    function saveAddress() {
+        // Retrieve values from form fields
+        const fullName = document.getElementById('fullName').value;
+        const phoneNumber = document.getElementById('phoneNumber').value;
+        const region = document.getElementById('region').value;
+        const province = document.getElementById('province').value;
+        // ... (similarly for other fields)
+
+        // Validate and save address if all fields are filled
+        if (fullName && phoneNumber && region /* && ... */) {
+            const addressObject = {
+                fullName,
+                phoneNumber,
+                region,
+                province,
+                // ... (similarly for other fields)
+            };
+
+            // Check if in edit mode
+            if (editIndex !== -1) {
+                // Replace the existing address at the edit index
+                addresses[editIndex] = addressObject;
+                editIndex = -1; // Reset edit mode
+            } else {
+                // Add a new address
+                addresses.push(addressObject);
+            }
+
+            updateCards();
+            cancelForm();
+        } else {
+            alert('Please fill in all the fields.');
+        }
+    }
+
+    function cancelForm() {
+        document.getElementById('addAddressForm').style.display = 'none';
+        // Clear form fields
+        clearFormFields();
+    }
+
+    function clearFormFields() {
+        // Clear form fields by setting their values to an empty string
+        document.getElementById('fullName').value = '';
+        document.getElementById('phoneNumber').value = '';
+        document.getElementById('region').value = '';
+        // ... (similarly for other fields)
+    }
+
+    function deleteAddress(index) {
+        addresses.splice(index, 1);
+        updateCards();
+    }
+
+    function editAddress(index) {
+        // Set the form fields with the selected address details
+        const selectedAddress = addresses[index];
+        document.getElementById('fullName').value = selectedAddress.fullName;
+        document.getElementById('phoneNumber').value = selectedAddress.phoneNumber;
+        document.getElementById('region').value = selectedAddress.region;
+        // ... (similarly for other fields)
+
+        // Set edit mode and the index being edited
+        editIndex = index;
+
+        // Show the form
+        toggleForm();
+    }
+
+    function updateCards() {
+        const addressContainer = document.getElementById('addressContainer');
+        addressContainer.innerHTML = '';
+
+        addresses.forEach((address, index) => {
+            const card = document.createElement('div');
+            card.className = 'addressCard';
+
+            // Create elements for each property and append them to the card
+            for (const key in address) {
+                if (address.hasOwnProperty(key)) {
+                    const p = document.createElement('p');
+                    p.textContent = `${key}: ${address[key]}`;
+                    card.appendChild(p);
+                }
+            }
+
+             // Create edit and delete buttons for each card
+             const editButton = document.createElement('button');
+             editButton.textContent = 'Edit';
+             editButton.onclick = () => editAddress(index);
+             card.appendChild(editButton);
+ 
+             const deleteButton = document.createElement('button');
+             deleteButton.textContent = 'Delete';
+             deleteButton.onclick = () => deleteAddress(index);
+             card.appendChild(deleteButton);
+ 
+             addressContainer.appendChild(card);
+        });
+    }
+    
+</script>
+
+</body>
+</html>

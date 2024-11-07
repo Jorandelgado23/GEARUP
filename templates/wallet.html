@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Cash In/Cash Out</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        input {
+            margin-bottom: 10px;
+        }
+
+        button {
+            padding: 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Wallet Balance: <span id="balance">0</span></h2>
+
+    <label for="amount">Amount:</label>
+    <input type="number" id="amount" placeholder="Enter amount">
+
+    <button onclick="cashIn()">Cash In</button>
+    <button onclick="cashOut()">Cash Out</button>
+
+    <script>
+        let balance = 0;
+
+        function updateBalance() {
+            document.getElementById('balance').innerText = balance;
+        }
+
+        function cashIn() {
+            const amount = parseFloat(document.getElementById('amount').value);
+            if (!isNaN(amount) && amount > 0) {
+                balance += amount;
+                updateBalance();
+            } else {
+                alert('Please enter a valid amount for cash in.');
+            }
+        }
+
+        function cashOut() {
+            const amount = parseFloat(document.getElementById('amount').value);
+            if (!isNaN(amount) && amount > 0 && balance >= amount) {
+                balance -= amount;
+                updateBalance();
+            } else {
+                alert('Please enter a valid amount for cash out, or your balance is insufficient.');
+            }
+        }
+    </script>
+
+
+    <section>
+        <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <title>Wallet Design</title>
+</head>
+<body>
+
+<div class="container mt-5">
+  <div class="card">
+    <div class="card-header">
+      <h5 class="card-title mb-0">My Wallet</h5>
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="card">
+            <div class="card-header">
+              <h6 class="card-title mb-0">Balance</h6>
+            </div>
+            <div class="card-body">
+              <p class="card-text">$1,000.00</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="card">
+            <div class="card-header">
+              <h6 class="card-title mb-0">Recent Transactions</h6>
+            </div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">Payment received - $500.00</li>
+              <li class="list-group-item">Purchase - $200.00</li>
+              <li class="list-group-item">Withdrawal - $100.00</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-footer">
+      <button type="button" class="btn btn-primary">CASH IN</button>
+      <button type="button" class="btn btn-secondary">CASH OUT</button>
+    </div>
+  </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
+
+    </section>
+
+</body>
+</html>

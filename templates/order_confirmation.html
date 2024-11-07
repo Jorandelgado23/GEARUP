@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="/static/assets/images/logocosmic/logo.png"/>
+<!-- Plugins CSS -->
+<link rel="stylesheet" href="/static/assets/css/plugins.css">
+<!-- Bootstap CSS -->
+<link rel="stylesheet" href="/static/assets/css/bootstrap.min.css">
+<!-- Main Style CSS -->
+<link rel="stylesheet" href="/static/assets/css/style.css">
+<link rel="stylesheet" href="/static/assets/css/responsive.css">
+    <title>Order Confirmation</title>
+    <style>
+        body{margin-top:20px;
+            background-color:#eee;
+            }
+            
+            .card {
+                box-shadow: 0 20px 27px 0 rgb(0 0 0 / 5%);
+            }
+            .card {
+                position: relative;
+                display: flex;
+                flex-direction: column;
+                min-width: 0;
+                word-wrap: break-word;
+                background-color: #fff;
+                background-clip: border-box;
+                border: 0 solid rgba(0,0,0,.125);
+                border-radius: 1rem;
+            }
+
+            .flash-messages {
+                list-style-type: none;
+                padding: 15px;
+                margin: 0;
+                color: white;
+                background-color: #bc1bb4; /* Firebrick color */
+                border: 1px solid #0a0304; /* Border color same as background */
+                border-radius: 5px;
+                text-align: center;
+                
+              }
+
+              .logo {
+                display: flex;
+                align-items: center;
+            }
+            
+            .logo a {
+                text-decoration: none; /* Remove underline from the anchor */
+                display: block; /* Make the anchor a block-level element */
+            }
+            
+            .logo img {
+                max-width: 50%; /* Make sure the image doesn't exceed its container */
+                height: auto; /* Maintain aspect ratio */
+                border-radius: 8px; /* Add some border-radius for a rounded look */
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow for a lifted appearance */
+            }
+            
+            /* Optional: Add some margin or padding for spacing */
+            .logo {
+                margin-bottom: 20px;
+            }
+    </style>
+</head>
+<body>
+                <div class="container">
+                    {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                      <ul class="flash-messages">
+                        {% for message in messages %}
+                          <li class="flash-message">{{ message }}</li>
+                        {% endfor %}
+                      </ul>
+                    {% endif %}
+                  {% endwith %}
+                                    <script>
+                                      // Function to remove flash messages after a certain time
+                                      function removeFlashMessages() {
+                                          var flashMessages = document.querySelector('.flash-messages');
+                                          if (flashMessages) {
+                                              setTimeout(function() {
+                                                  flashMessages.remove();
+                                              }, 3000); // Change the delay time (in milliseconds) as needed
+                                          }
+                                      }
+                                      
+                                      // Call the function when the page finishes loading
+                                      window.onload = removeFlashMessages;
+                                  </script>
+                                  <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <div class="invoice-title">
+                                                    <h1 class="float-end font-size-15">Order Confirmation</h1>
+                                                    <div class="mb-4">
+                                                        <h2 class="mb-1 text-muted">GEAR UP! SHOP</h2>
+                                                    </div>
+                                                    <div class="text-muted">
+                                                        <p class="mb-1">STA CRUZ LAGUNA</p>
+                                                        <p class="mb-1"><i class="uil uil-envelope-alt me-1"></i>GEARUP@gmail.com</p>
+                                                        <p><i class="uil uil-phone me-1"></i>(+63)9207569581</p>
+                                                    </div>
+                                                </div>
+
+                                
+                                                <hr class="my-4">
+                                
+                                                <div class="row">
+                                                    <div class="col-sm-6">
+                                                        <div class="text-muted">
+                                                            <h5 class="font-size-16 mb-3">Billing Information:</h5>
+                                                            <h5 class="font-size-15 mb-2">{{ order_details[1] }} {{ order_details[2] }}</h5>
+                                                            <p class="mb-1">{{ order_details[4] }}</p>
+                                                            <p class="mb-1">{{ order_details[3] }}</p>
+                                                            <p>{{ order_details[5] }}</p>
+                                                        </div>
+                                                    </div>
+                                
+                                                    <div class="col-sm-6">
+                                                        <div class="text-muted text-sm-end">
+                                                            <div>
+                                                                <h5 class="font-size-15 mb-1">Order ID:</h5>
+                                                                <p>{{ order_details[0] }}</p>
+                                                            </div>
+                                                            <div class="mt-4">
+                                                                <h5 class="font-size-15 mb-1">Order Date:</h5>
+                                                                <p id="order-date"></p>
+                                                            </div>
+                                                            <div class="mt-4">
+                                                                <h5 class="font-size-15 mb-1">Payment Method:</h5>
+                                                                <p>{{ order_details[6] }}</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                
+                                                <div class="py-2">
+                                                    <h5 class="font-size-15">Order Summary</h5>
+                                
+                                                    <div class="table-responsive">
+                                                        <table class="table align-middle table-nowrap table-centered mb-0">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th style="width: 70px;">No.</th>
+                                                                    <th>Product name</th>
+                                                                    <th>Price</th>
+                                                                    <th>Quantity</th>
+                                                                    <th>Subtotal</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                {% for item in order_items %}
+                                                                <tr>
+                                                                    <th scope="row">{{ loop.index }}</th>
+                                                                    <td>
+                                                                        <div>
+                                                                            <h5 class="text-truncate font-size-14 mb-1">{{ item[] }}</h5>
+                                                                            <p class="text-muted mb-0">{{ item[2] }}</p>
+                                                                        </div>
+                                                                    </td>
+                                                                    <td>{{ item[4] }}</td>
+                                                                    <td>{{ item[5] }}</td>
+                                                                    <td class="text-end">{{ item[9] }}</td>
+                                                                </tr>
+                                                                {% endfor %}
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                
+                                                    <div class="d-print-none mt-4">
+                                                        <div class="float-end">
+                                                            <a href="javascript:window.print()" class="btn btn-success me-1"><i class="fa fa-print"></i> Print</a>
+                                                            <!-- <a href="#" class="btn btn-primary w-md">Send</a> -->
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <a class="btn btn-primary" href="{{ url_for('order_detail') }}">go to my purchase</a>
+                                
+
+
+    <script src="/static/assets/js/vendor/jquery-3.3.1.min.js"></script>
+     <script src="/static/assets/js/vendor/jquery.cookie.js"></script>
+     <script src="/static/assets/js/vendor/modernizr-3.6.0.min.js"></script>
+     <script src="/static/assets/js/vendor/wow.min.js"></script>
+     <!-- Including Javascript -->
+     <script src="/static/assets/js/bootstrap.min.js"></script>
+     <script src="/static/assets/js/plugins.js"></script>
+     <script src="/static/assets/js/popper.min.js"></script>
+     <script src="/static/assets/js/lazysizes.js"></script>
+     <script src="/static/assets/js/main.js"></script>
+
+
+     <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Get the current date and time
+            var currentDate = new Date();
+    
+            // Format the date
+            var formattedDate = currentDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric' });
+    
+            // Update the order date element
+            document.getElementById('order-date').innerText = formattedDate;
+        });
+    </script>
+    
+</body>
+</html>

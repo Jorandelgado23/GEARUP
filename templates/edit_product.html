@@ -1,0 +1,106 @@
+{% extends 'base.html' %}
+
+{% block content %}
+l   <ink rel="shortcut icon" href="/static/assets/images/logocosmic/logo.png"/>
+    <!-- Plugins CSS -->
+    <link rel="stylesheet" href="/static/assets/css/plugins.css">
+    <!-- Bootstap CSS -->
+    <link rel="stylesheet" href="/static/assets/css/bootstrap.min.css">
+    <!-- Main Style CSS -->
+    <link rel="stylesheet" href="/static/assets/css/style.css">
+    <link rel="stylesheet" href="/static/assets/css/responsive.css">
+    <div class="container">
+        <style>
+            form {
+                max-width: 400px;
+                margin: 20px auto;
+                background-color: #fff;
+                padding: 20px;
+                border-radius: 8px;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            }
+            
+            label {
+                display: block;
+                margin-bottom: 8px;
+                color: #333;
+            }
+            
+            input[type="text"],
+            select {
+                width: 100%;
+                padding: 10px;
+                margin-bottom: 15px;
+                box-sizing: border-box;
+                border: 1px solid #ddd;
+                border-radius: 5px;
+            }
+            
+            select {
+                appearance: none;
+                padding: 10px;
+                cursor: pointer;
+            }
+            
+            input[type="submit"] {
+                background-color: #007bff;
+                color: #fff;
+                padding: 12px 20px;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+            }
+            
+            input[type="submit"]:hover {
+                background-color: #0056b3;
+            }
+        </style>
+        <h2 class="title">Edit Product</h2>
+        <form method="POST" action="{{ url_for('edit_product', product_id=product[0]) }}">
+            <label for="new_name">Product Name:</label>
+            <input type="text" name="new_name" placeholder="Product Name" value="{{ product[1] }}" required>
+        
+            <label for="new_description">Product Description:</label>
+            <input type="text" name="new_description" placeholder="Product Description" value="{{ product[2] }}" required>
+        
+            <label for="new_price">Product Price:</label>
+            <input type="text" name="new_price" placeholder="Product Price" value="{{ product[3] }}" required>
+        
+            <label for="new_stock">Stock:</label>
+            <input type="text" name="new_stock" placeholder="Stock" value="{{ product[4] }}" required>
+        
+            <label for="new_variation">Variation:</label>
+            <input type="text" name="new_variation" placeholder="Variation" value="{{ product[5] }}" required>
+        
+            <!-- Dropdown for Category -->
+            <label for="new_category">Category:</label>
+            <select name="new_category" id="new_category" required>
+                <option value="Skin Care" {% if product[6] == 'Skin Care' %} selected {% endif %}>Skin Care</option>
+                <option value="Make Up" {% if product[6] == 'Make Up' %} selected {% endif %}>Make Up</option>
+                <option value="Hair Care" {% if product[6] == 'Hair Care' %} selected {% endif %}>Hair Care</option>
+                <option value="Fragrances" {% if product[6] == 'Fragrances' %} selected {% endif %}>Fragrances</option>
+                <option value="Personal Care Appliances" {% if product[6] == 'Personal Care Appliances' %} selected {% endif %}>Personal Care Appliances</option>
+            </select>
+
+            <label for="new_discount_rate">Discount Rate:</label>
+    <input type="text" name="new_discount_rate" placeholder="Discount Rate" value="{{ product[8] }}" required>
+        
+            <input type="submit" value="Update Product">
+        </form>
+    </div>
+
+    <script src="/static/assets/js/vendor/jquery-3.3.1.min.js"></script>
+    <script src="/static/assets/js/vendor/jquery.cookie.js"></script>
+    <script src="/static/assets/js/vendor/modernizr-3.6.0.min.js"></script>
+    <script src="/static/assets/js/vendor/wow.min.js"></script>
+    <!-- Including Javascript -->
+    <script src="/static/assets/js/bootstrap.min.js"></script>
+    <script src="/static/assets/js/plugins.js"></script>
+    <script src="/static/assets/js/popper.min.js"></script>
+    <script src="/static/assets/js/lazysizes.js"></script>
+    <script src="/static/assets/js/main.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+{% endblock %}

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="/static/assets/images/logocosmic/logo.png" />
+    <!-- Plugins CSS -->
+    <link rel="stylesheet" href="/static/assets/css/plugins.css">
+    <!-- Bootstap CSS -->
+    <link rel="stylesheet" href="/static/assets/css/bootstrap.min.css">
+    <!-- Main Style CSS -->
+    <link rel="stylesheet" href="/static/assets/css/style.css">
+    <link rel="stylesheet" href="/static/assets/css/responsive.css">
+    <title>Seller Registration Success</title>
+</head>
+<body>
+    <div>
+        <h1>Seller Registration Successful!</h1>
+        <p>Congratulations! You have successfully registered as a seller.</p>
+        <p>Your shop ID is: {{ shop_id }}</p>
+        <p>Use this shop ID for any future interactions related to your shop.</p>
+        <p>Thank you for joining our platform!</p>
+
+        <button href="{{ url_for('sellerpage') }}">SELLER DASHBOARD</button>
+    </div>
+</body>
+</html>

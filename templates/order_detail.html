@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+            integrity="sha512-1qcd0MDiccMmJ3fr4z2APtCwSov+g8qE7a1IaQz5yblLEZNLNT5WLC/Bp9QpLbkL1Ix9MTEUwHkjhFVplYAfaA=="
+            crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.4/dist/sweetalert2.min.css">
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/static/assets/images/logocosmic/logo.png" />
+    <!-- Plugins CSS -->
+    <link rel="stylesheet" href="/static/assets/css/plugins.css">
+    <!-- Bootstap CSS -->
+    <link rel="stylesheet" href="/static/assets/css/bootstrap.min.css">
+    <!-- Main Style CSS -->
+    <link rel="stylesheet" href="/static/assets/css/style.css">
+    <link rel="stylesheet" href="/static/assets/css/responsive.css">
+    <title>ORDER DETAILS</title>
+</head>
+<style>
+    .modal {
+        z-index: 1050 !important;
+    }
+
+    /* Hide the modal backdrop */
+    .modal-backdrop {
+        display: none !important;
+    }
+</style>
+
+
+<body>
+
+
+    <div class="pageWrapper">
+        <!-- Include the search form -->
+        <div class="search">
+            <div class="search__form">
+                <form class="search-bar__form" action="{{ url_for('search') }}" method="post">
+                    <button class="go-btn search__button" type="submit"><i class="icon anm anm-search-l"></i></button>
+                    <input class="search__input" type="search" name="search_query" value="" placeholder="Search entire store..." aria-label="Search" autocomplete="off">
+                </form>
+                <button type="button" class="search-trigger close-btn"><i class="anm anm-times-l"></i></button>
+            </div>
+        </div>
+        <!--Top Header-->
+        <div class="top-header">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-10 col-sm-8 col-md-5 col-lg-4">
+                        
+                        <p class="phone-no"><i class="anm anm-phone-s"></i>091234567</p>
+                    </div>
+                    <div class="col-sm-4 col-md-4 col-lg-4 d-none d-lg-none d-md-block d-lg-block">
+                        <div class="text-center"><p class="top-header_middle-text">COSMIC PHILIPPINES</p></div>
+                    </div>
+                     <!-- User Menu -->
+                     <div class="col-2 col-sm-4 col-md-3 col-lg-4 text-right">
+                        <span class="user-menu d-block d-lg-none" data-toggle="modal" data-target="#userMenuModal">
+                            <i class="anm anm-user-al" aria-hidden="true"></i>
+                        </span>
+                        <ul class="customer-links list-inline">
+                            {% if logged_in %}
+                            <li class="nav-item">
+                                <a class="nav-link bi bi-person-circle" href="#" onclick="showProfileMenu()">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+                                        <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
+                                        <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
+                                    </svg>
+                                    {{ email_name }}
+                                </a>
+                            </li>
+                            {% else %}
+                            <li class="nav-item">
+                                <a class="nav-link bi bi-person-circle" href="{{ url_for('login') }}">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+                                        <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
+                                        <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
+                                    </svg>
+                                    Log In
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ url_for('register') }}">Create Account</a>
+                            </li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                    
+                    <!-- End User Menu -->
+                </div>
+            </div>
+        </div>
+        <!--End Top Header-->
+        <!--Header-->
+        <div class="header-wrap classicHeader animated d-flex">
+            <div class="container-fluid">        
+                <div class="row align-items-center">
+                    <!--Desktop Logo-->
+                    <div class="logo col-md-1 col-lg-2 d-none d-lg-block">
+                        <a href="{{ url_for('index') }}">
+                            <img src="/static/assets/images/logocosmic/LOGO1.png" alt="Belle Multipurpose Html Template" title="Belle Multipurpose Html Template" />
+                        </a>
+                    </div>
+                    <!--End Desktop Logo-->
+                    <div class="col-2 col-sm-3 col-md-3 col-lg-8">
+                        <div class="d-block d-lg-none">
+                            <button type="button" class="btn--link site-header__menu js-mobile-nav-toggle mobile-nav--open">
+                                <i class="icon anm anm-times-l"></i>
+                                <i class="anm anm-bars-r"></i>
+                            </button>
+                        </div>
+                        <!--Desktop Menu-->
+                        <nav class="grid__item" id="AccessibleNav"><!-- for mobile -->
+                            <ul id="siteNav" class="site-nav medium center hidearrow">
+                                <li class="lvl1 parent megamenu"><a href="{{ url_for('index') }}">Home <i class="anm anm-angle-down-l"></i></a>
+    
+                                </li>
+                                <li class="lvl1 parent megamenu"><a href="{{ url_for('shop') }}">Shop <i class="anm anm-angle-down-l"></i></a>
+                                    
+                                </li>
+                            <li class="lvl1 parent megamenu"><a href="{{ url_for('aboutus') }}">About Us <i class="anm anm-angle-down-l"></i></a>
+                                
+                            </li>
+                            <li class="lvl1 parent dropdown"><a href="#">Pages <i class="anm anm-angle-down-l"></i></a>
+                              <ul class="dropdown">
+                                  <li><a href="{{ url_for('cart') }}" class="site-nav">Cart Page <i class="anm anm-angle-right-l"></i></a></li>
+                                <li><a href="{{ url_for('checkout') }}" class="site-nav">Checkout</a></li>
+    
+                                <li><a href="contact-us.html" class="site-nav">Contact Us</a></li>
+                                <li><a href="faqs.html" class="site-nav">FAQs</a></li>
+                          </ul>
+                        </nav>
+                    </div>
+
+
+
+    <div>
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="bredcrumbWrap">
+    <div class="container breadcrumbs">
+        <a href="{{ url_for('prof') }}" title="Back to the home page">PROFILE</a><span aria-hidden="true"></span><span style="color: #f40863;">ORDERS</span>
+    </div>
+    <br>
+
+
+
+
+  <!-- Add filter buttons -->
+<div class="btn-group" role="group" aria-label="Order Filters">
+    <a href="/order?status=all" class="btn btn-info">All</a>
+    <a href="/order?status=Pending" class="btn btn-info">Pending</a>
+    <a href="/order?status=Confirmed Order" class="btn btn-info">Confirmed</a>
+    <a href="/order?status=Processing Order" class="btn btn-info">Processing</a>
+    <a href="/order?status=Quality Check" class="btn btn-info">Quality Check</a>
+    <a href="/order?status=Product Dispatched" class="btn btn-info">Product Dispatched</a>
+    <a href="/order?status=Product Delivered" class="btn btn-info">Product Delivered</a>
+    <a href="/order?status=Canceled" class="btn btn-info">Canceled</a>
+    <!-- Add more buttons for other statuses as needed -->
+</div>
+
+
+    <div class="osahan-account-page-right shadow-sm bg-white p-2 h-100 w-500">
+        <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade active show" id="orders" role="tabpanel" aria-labelledby="orders-tab">
+                <h4 class="font-weight-bold mt-0 mb-4">ORDERS</h4>
+                {% for order in orders %}
+                    <div class=" card mb-4 order-list shadow-sm" style="background-color: #fff3db;">
+                        <div class="gold-members p-4">
+                            <div class="media">
+                                <div class="media-body">
+                                    <div class="text-right py-1 px-2"><span class="text-medium">Status:</span> {{ order['status'] }}</div>
+                                    <h5 class="mt-0 mb-4">Order #{{ order.order_id }}</h5>
+                                    <p><strong>shop name:</strong> {{ order.shop_name }}</p>
+                                    <p><strong>Name:</strong> {{ order.firstname }} {{ order.lastname }}</p>
+                                    <p><strong>Email:</strong> {{ order.email }}</p>
+                                    <p><strong>Address:</strong> {{ order.address }}</p>
+                                    <p><strong>Phone Number:</strong> {{ order.phone_number }}</p>
+                                    <p><strong>Payment Method:</strong> {{ order.payment_method }}</p>
+                                    <p><strong>Order Date:</strong> {{ order.order_date }}</p>
+                                   
+                                    
+                                    <!-- Display order items -->
+                                    <h6 class="font-weight-bold mt-3">Order Items</h6>
+                                    <ul>
+                                        {% if 'order_items' in order %}
+                                            {% for item in order.order_items %}
+                                                <li>{{ item.product_name }} - {{ item.variation }} ({{ item.quantity }} x ₱{{ item.product_price }}) = ₱{{ item.subtotal }}</li>
+                                            {% endfor %}
+                                        {% endif %}
+                                    </ul>
+                                    
+                                    <hr>
+
+                                    <div class="float-right">
+                                        <a class="btn btn-sm btn-primary" style="background-color: #dc43f1;" href="/order_tracking/{{ order.order_id }}"><i class="icofont-refresh"></i>view track</a>
+                                    </div>
+
+                                    <div class="float-right">
+                                        <a class="btn btn-sm btn-primary" style="background-color: #0b0137;" href="/order_confirmation/{{ order.order_id }}"><i class="icofont-refresh"></i>invoice</a>
+                                    </div>
+
+                                    {% if order['status'] == 'Pending' %}
+<div class="float-left">
+    <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#cancelOrderModal{{ order.order_id }}">
+        <i class="icofont-ui-close"></i>Cancel Order
+    </button>
+</div>
+                                    
+                                    
+<!-- Cancel Order Modal -->
+<!-- Cancel Order Modal -->
+<div class="modal fade" id="cancelOrderModal{{ order.order_id }}" tabindex="-1" role="dialog" aria-labelledby="cancelOrderModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="cancelOrderModalLabel">Cancel Order</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                
+                <div class="container mt-4">
+                    <h4 class="font-weight-bold">Cancel Order</h4>
+                    <form method="post" action="{{ url_for('cancel_order', order_id=order.order_id) }}">
+                        <div class="form-group">
+                            <label for="cancellation_reason">Select Cancellation Reason:</label>
+                            <select class="form-control" id="cancellation_reason" name="cancellation_reason" required>
+                                <option value="Not satisfied with the product">Not satisfied with the product</option>
+                                <option value="Changed my mind">Changed my mind</option>
+                                <option value="Found a better deal">Found a better deal</option>
+                                <!-- Add more reasons as needed -->
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-danger">Cancel Order</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endif %}
+                                    <!-- <p class="mb-0 text-black text-primary pt-2"><span class="text-black font-weight-bold">ORDER TOTAL:</span> ₱{{ order.total }}</p> -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+                
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+        
+</div>
+</div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="/static/assets/js/vendor/jquery.cookie.js"></script>
+<script src="/static/assets/js/vendor/modernizr-3.6.0.min.js"></script>
+<script src="/static/assets/js/vendor/wow.min.js"></script>
+<!-- Including Javascript -->
+<script src="/static/assets/js/bootstrap.min.js"></script>
+<script src="/static/assets/js/plugins.js"></script>
+<script src="/static/assets/js/popper.min.js"></script>
+<script src="/static/assets/js/lazysizes.js"></script>
+<script src="/static/assets/js/main.js"></script>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+
+
+<script>
+    // JavaScript function to close the modal
+    function closeModal() {
+        $('.modal').modal('hide');
+    }
+
+    // Attach the closeModal function to the close-icon buttons
+    $(document).ready(function() {
+        $('.close-icon').click(function() {
+            closeModal();
+        });
+    });
+</script>
+
+
+
+<script>
+    function showProfileMenu() {
+        Swal.fire({
+            html: `
+                <a class="dropdown-item" href="/prof">MY PROFILE</a>
+                <a class="dropdown-item" href="{{ url_for('LOGOUT') }}">LOGOUT</a>
+            `,
+            showCloseButton: true,
+            showConfirmButton: false,
+            backdrop: false,
+        });
+    }
+</script>
+
+
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.4/dist/sweetalert2.min.js"></script>
+</body>
+</html>
