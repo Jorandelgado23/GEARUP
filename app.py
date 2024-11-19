@@ -623,7 +623,7 @@ def forgot_password():
     return render_template('forgot_password.html')
 
 
-categories = ["Skin Care", "Make Up", "Hair Care", "Fragrances", "Personal Care Appliances"]
+categories = ["sports equipment", "sportswear", "dietary product", "fitness equipment", "protective equipment"]
 
 @app.route('/shop', methods=['GET'])
 def shop():
@@ -2172,7 +2172,7 @@ def search():
             search_list.append(product_dict)
 
         # Example categories (replace with actual data from your database)
-        categories = ["Skin Care", "Make Up", "Hair Care", "Fragrances", "Personal Care Appliances"]
+        categories = ["sports equipment", "sportswear", "dietary product", "fitness equipment", "protective equipment"]
 
         # Generate the HTML for the category sidebar
         category_filter_html = generate_category_sidebar(categories)
@@ -2206,7 +2206,7 @@ def filter_by_category(category):
         filtered_list.append(product_dict)
 
     # Example categories (replace with actual data from your database)
-    categories = ["Skin Care", "Make Up", "Hair Care", "Fragrances", "Personal Care Appliances"]
+    categories = ["sports equipment", "sportswear", "dietary product", "fitness equipment", "protective equipment"]
     
     # Generate the HTML for the category sidebar
     category_filter_html = generate_category_sidebar(categories)

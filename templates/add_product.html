@@ -20,7 +20,8 @@
     <!-- Custom stylesheet - for your changes-->
     <link rel="stylesheet" href="/static/assets/css/style.violet.css">
     <!-- Favicon-->
-    <link rel="shortcut icon" href="img/favicon.ico">
+    <link rel="shortcut icon" href="/static/assets/images/sport/favicongearup.png" />
+
     <!-- Tweaks for older IEs--><!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
@@ -41,9 +42,9 @@
         </div>
         <div class="container-fluid d-flex align-items-center justify-content-between">
           <div class="navbar-header">
-            <!-- Navbar Header--><a href="{{ url_for('sellerpage') }}" class="navbar-brand">
-              <div class="brand-text brand-big visible text-uppercase"><strong class="text-primary">COS</strong><strong>MIC</strong></div>
-              <div class="brand-text brand-sm"><strong class="text-primary">C</strong><strong>M</strong></div></a>
+            <!-- Navbar Header--><a href="/sellerpage" class="navbar-brand">
+              <div class="brand-text brand-big visible text-uppercase"><strong class="text-primary">GE</strong><strong>AR UP</strong></div>
+              <div class="brand-text brand-sm"><strong class="text-primary">G</strong><strong>P</strong></div></a>
             <!-- Sidebar Toggle Btn-->
             <button class="sidebar-toggle"><i class="fa fa-long-arrow-left"></i></button>
           </div>
@@ -101,44 +102,54 @@
       </nav>
     </header>
     <div class="d-flex align-items-stretch">
-        <!-- Sidebar Navigation-->
-        <nav id="sidebar">
-          <!-- Sidebar Header-->
-          <div class="sidebar-header d-flex align-items-center">
-            <div class="avatar"><img src="/static/assets/images/logocosmic/logo.png" alt="..." class="img-fluid rounded-circle"></div>
-            <div class="title">
-                <h1 class="h6">{{ email }}</h1>
-              <p>SELLER</p>
-            </div>
+         <!-- Sidebar Navigation-->
+      <nav id="sidebar">
+        <!-- Sidebar Header-->
+        <div class="sidebar-header d-flex align-items-center">
+          <div class="avatar"><img src="/static/assets/images/sport/grearuplogo.png" alt="..." class="img-fluid rounded-circle"></div>
+          <div class="title">
+            <h1 class="h6">{{ email }}</h1>
           </div>
-          <!-- Sidebar Navidation Menus--><span class="heading">Main</span>
-          <ul class="list-unstyled">
-                  <li class="active"><a href="/sellerpage"> <i class="icon-home"></i>Home </a></li>
-  
-                  <li><a href="#exampledropdownDropdown" aria-expanded="false" data-toggle="collapse"> <i class="icon-windows"></i>ORDERS</a>
-                    <ul id="exampledropdownDropdown" class="collapse list-unstyled ">
-                      <li><a href="{{ url_for('user_transaction') }}">my order</a></li>
-                      <li><a href="{{ url_for('seller_cancellation') }}">Cancellation Order</a></li>
-                      <li><a href="#">return and repund</a></li>
-                    </ul>
-                  </li>
-  
-                  <li><a href="#exampledropdownDropdown" aria-expanded="false" data-toggle="collapse"> <i class="icon-windows"></i>PRODUCTS</a>
-                    <ul id="exampledropdownDropdown" class="collapse list-unstyled ">
-                      <li><a href="{{ url_for('my_products') }}">My Product</a></li>
-                      <li><a href="/addpr">Add Product</a></li>
-                      <li hidden><a href="#">Suspendent Product</a></li>
-                    </ul>
-                  </li>
-                  
-  
-                  <li hidden><a href="tables.html"> <i class="icon-grid"></i>Tables </a></li>
-                  <li hidden><a href="charts.html"> <i class="fa fa-bar-chart"></i>Charts </a></li>
-                  <li hidden><a href="forms.html"> <i class="icon-padnote"></i>Forms </a></li>
-                  <li><a href="{{ url_for('seller_profile') }}"> <i class="icon-padnote"></i>ACCOUNT SETTING</a></li>
+        </div>
+        <!-- Sidebar Navidation Menus--><span class="heading">Main</span>
+        <ul class="list-unstyled">
+                <li class="active"><a href="/sellerpage"> <i class="icon-home"></i>Home </a></li>
+                <li><a href="{{ url_for('index') }}"> <i class="bi bi-globe-americas"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-globe-americas" viewBox="0 0 16 16">
+                  <path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0M2.04 4.326c.325 1.329 2.532 2.54 3.717 3.19.48.263.793.434.743.484-.08.08-.162.158-.242.234-.416.396-.787.749-.758 1.266.035.634.618.824 1.214 1.017.577.188 1.168.38 1.286.983.082.417-.075.988-.22 1.52-.215.782-.406 1.48.22 1.48 1.5-.5 3.798-3.186 4-5 .138-1.243-2-2-3.5-2.5-.478-.16-.755.081-.99.284-.172.15-.322.279-.51.216-.445-.148-2.5-2-1.5-2.5.78-.39.952-.171 1.227.182.078.099.163.208.273.318.609.304.662-.132.723-.633.039-.322.081-.671.277-.867.434-.434 1.265-.791 2.028-1.12.712-.306 1.365-.587 1.579-.88A7 7 0 1 1 2.04 4.327Z"/>
+                </svg></i>E-commerce</a></li>
+
+                <li><a href="#exampledropdownDropdown" aria-expanded="false" data-toggle="collapse"> <i class="icon-windows"></i>ORDERS</a>
+                  <ul id="exampledropdownDropdown" class="collapse list-unstyled ">
+                    <li><a href="{{ url_for('user_transaction') }}">my order</a></li>
+                    <li><a href="{{ url_for('seller_cancellation') }}">Cancellation Order</a></li>
+                    <li><a href="">return and refund</a></li>
+                  </ul>
+                </li>
+
+                <li><a href="#exampledropdownDropdown" aria-expanded="false" data-toggle="collapse"> <i class="icon-windows"></i>PRODUCTS</a>
+                  <ul id="exampledropdownDropdown" class="collapse list-unstyled ">
+                    <li><a href="{{ url_for('my_products') }}">My Product</a></li>
+                    <li><a href="/addpr">Add Product</a></li>
+                  </ul>
+                </li>
+
+
+
+                <li><a href="#exampledropdownDropdown" aria-expanded="false" data-toggle="collapse"> <i class="icon-windows"></i>WALLET</a>
+                  <ul id="exampledropdownDropdown" class="collapse list-unstyled ">
+                    <li><a href="{{ url_for('seller_wallet') }}">My wallet</a></li>
+                    <li hidden><a href="/addpr">Add Product</a></li>
+                  </ul>
+                </li>
                 
-        </nav>
-      <!-- Sidebar Navigation end-->
+
+
+                
+                <li hidden><a href="tables.html"> <i class="icon-grid"></i>Tables </a></li>
+                <li hidden><a href="charts.html"> <i class="fa fa-bar-chart"></i>Charts </a></li>
+                <li><a href="{{ url_for('seller_profile') }}"> <i class="icon-padnote"></i>ACCOUNT SETTING</a></li>
+              
+      </nav>
       <div class="page-content">
         <!-- Page Header-->
         <div class="page-header no-margin-bottom">
@@ -252,11 +263,11 @@
                               <label class="col-sm-3 form-control-label" for="category">Category:</label>
                               <select class="form-control mb-3 mb-3" name="category" id="category" required>
                                   <option  value="" disabled selected>Select Category</option>
-                                  <option value="Skin Care">Skin Care</option>
-                                  <option value="Make Up">Make Up</option>
-                                  <option value="Hair Care">Hair Care</option>
-                                  <option value="Fragrances">Fragrances</option>
-                                  <option value="Personal Care Appliances">Personal Care Appliances</option>
+                                  <option value="sports equipment">sports equipment</option>
+                                  <option value="sportswear">sportswear</option>
+                                  <option value="dietary product">dietary product</option>
+                                  <option value="fitness equipment">fitness equipment</option>
+                                  <option value="protective equipment">protective equipment</option>
                               </select>
                           </div>
           
